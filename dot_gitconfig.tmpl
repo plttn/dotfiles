@@ -1,11 +1,11 @@
 [init]
 	defaultBranch = main	
 [include]
-  path = /Users/jack/.gitconfig.d/themes.gitconfig
+    path = /Users/jack/.gitconfig.d/themes.gitconfig
 [user]
-	email = "jack@platten.me"
-	name = "Jack Platten"
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG
+    email = "{{- .email }}"
+	name = "{{- .name }}"
+    signingkey = {{ .signingkey }}
 [pull]
 	rebase = true
 [alias]
