@@ -74,11 +74,6 @@
 [diff]
   colorMoved = default
 
-[merge]
-  conflictstyle = diff3
-
-[diff]
-	colorMoved = zebra
 
 
 [gpg "ssh"]
@@ -110,16 +105,24 @@
   path = /Users/jack/.gitconfig.d/gitlab.conf
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
   path = /Users/jack/.gitconfig.d/gitlab.conf
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+        difftool = true
+
+{{- if eq .chezmoi.os "darwin" }}
+[difftool "kale"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "kale"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+{{- end }}
+[difftool]
+  prompt = false
+  trustExitCode = true
 [gpg]
 	program = /opt/homebrew/bin/gpg
-[diff]
-  tool = Kaleidoscope
-[merge]
-  tool = Kaleidoscope
 [commit]
 	gpgsign = true
