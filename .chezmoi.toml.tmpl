@@ -1,0 +1,66 @@
+{{- $is_wsl := false }}
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{- $is_wsl = true}}
+{{   end }}
+{{ end }}
+
+{{- /* Checks if running interactively, which is not the case for GitHub Codespaces */ -}}
+{{- $interactive := stdinIsATTY -}}
+
+{{- /* Initializes the name variable with a default value */ -}}
+{{- $name := "Jack Platten" -}}
+{{- /* If name was previously set, reuses it */ -}}
+{{- if hasKey . "name" -}}
+{{-   $name = .name -}}
+{{- /* Otherwise, if running interactively, prompts for a name */ -}}
+{{- else if $interactive -}}
+{{-   $name = promptString "name" $name -}}
+{{- end -}}
+
+{{- /* Does the same for the email */ -}}
+{{- $email := "jack@platten.me" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else if $interactive -}}
+{{-   $email = promptString "email" $email -}}
+{{- end -}}
+
+{{- $signingkey := "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG" -}}
+
+
+{{- if $interactive -}}
+{{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
+{{- end -}}
+
+
+{{ $computerName := .chezmoi.hostname }}
+{{- if eq .chezmoi.os "darwin" -}}
+{{ $computerName = output "scutil" "--get" "ComputerName" | trim }}
+{{ end -}}
+
+
+sourceDir = "{{ .chezmoi.sourceDir }}"
+
+
+[data]
+  name = "{{ $name }}"
+  email =  "{{ $email }}"
+  is_wsl = {{ $is_wsl }}
+  computer_name = "{{ $computerName }}"
+  os = "{{ .chezmoi.os }}"
+  signingkey = "{{ $signingkey }}"
+
+[git]
+  autoCommit = true
+  
+[edit]
+    command = "code"
+    args = ["--wait"]
+
+{{- if eq .chezmoi.os "darwin" }}
+[merge]
+    command = "ksdiff"
+    args = ["--merge", "--output", "{{"{{ .Source }}"}}", "{{"{{ .Destination }}"}}","{{"{{ .Target }}"}}"]
+{{- end }}

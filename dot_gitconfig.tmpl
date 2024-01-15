@@ -1,0 +1,125 @@
+[init]
+	defaultBranch = main	
+[include]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/themes.gitconfig
+[user]
+	email = "{{- .email }}"
+	name = "{{- .name }}"
+  signingkey = {{ .signingkey }}
+[pull]
+	rebase = true
+[alias]
+  # one-line log
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	le = log --oneline --decorate
+
+	lg = lg1
+  lg1 = lg1-specific --all
+  lg2 = lg2-specific --all
+  lg3 = lg3-specific --all
+
+  lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+  lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+  lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+
+
+  a = add
+  ap = add -p
+  c = commit --verbose
+  ca = commit -a --verbose
+  cm = commit -m
+  cam = commit -a -m
+  m = commit --amend --verbose
+  
+  d = diff
+  ds = diff --stat
+  dc = diff --cached
+
+  s = status -s
+  co = checkout
+  cob = checkout -b
+  # list branches sorted by last modified
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+  # list aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = code --wait
+	pager = delta
+	excludesfile = {{ .chezmoi.homeDir }}/.config/git/ignore
+
+[interactive]
+  diffFilter = delta --color-only
+
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+	colorMoved = zebra
+
+
+[gpg "ssh"]
+	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
+
+    
+	#program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+    
+
+[fetch]
+	prune = true
+
+[gpg]
+  format = ssh
+
+[push]
+	autoSetupRemote = true
+
+
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
+  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[diff]
+  tool = Kaleidoscope
+[merge]
+  tool = Kaleidoscope
+[commit]
+	gpgsign = true
