@@ -1,11 +1,11 @@
 [init]
 	defaultBranch = main	
 [include]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/themes.gitconfig
+  path = /Users/jack/.gitconfig.d/themes.gitconfig
 [user]
-	email = "{{- .email }}"
-	name = "{{- .name }}"
-  signingkey = {{ .signingkey }}
+	email = "jack@platten.me"
+	name = "Jack Platten"
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG
 [pull]
 	rebase = true
 [alias]
@@ -55,7 +55,7 @@
 [core]
 	editor = code --wait
 	pager = delta
-	excludesfile = {{ .chezmoi.homeDir }}/.config/git/ignore
+	excludesfile = /Users/jack/.config/git/ignore
 
 [interactive]
   diffFilter = delta --color-only
@@ -82,7 +82,7 @@
 
 
 [gpg "ssh"]
-	allowedSignersFile = {{ .chezmoi.homeDir }}/.ssh/allowed_signers
+	allowedSignersFile = /Users/jack/.ssh/allowed_signers
 
     
 	#program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
@@ -99,17 +99,17 @@
 
 
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+  path = /Users/jack/.gitconfig.d/github.conf
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+  path = /Users/jack/.gitconfig.d/github.conf
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/github.conf
+  path = /Users/jack/.gitconfig.d/github.conf
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+  path = /Users/jack/.gitconfig.d/gitlab.conf
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+  path = /Users/jack/.gitconfig.d/gitlab.conf
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-  path = {{ .chezmoi.homeDir }}/.gitconfig.d/gitlab.conf
+  path = /Users/jack/.gitconfig.d/gitlab.conf
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
