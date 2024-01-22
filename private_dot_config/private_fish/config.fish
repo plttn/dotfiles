@@ -17,4 +17,4 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
+source ~/.asdf/asdf.fish
