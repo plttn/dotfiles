@@ -16,7 +16,7 @@ end
 config.color_scheme = 'Brogrammer'
 
 config.font = wezterm.font('Berkeley Mono')
-config.harfbuzz_features = { 'ss03=1, ss04=1, ss05=1, cv08=1, calt=1, dlig=1' }
+config.harfbuzz_features = { 'ss02=1' }
 config.font_size = 13
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 110
