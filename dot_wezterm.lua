@@ -15,7 +15,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'Brogrammer'
 
-config.font = wezterm.font('CommitMono')
+config.font = wezterm.font('Berkeley Mono')
 config.harfbuzz_features = { 'ss03=1, ss04=1, ss05=1, cv08=1, calt=1, dlig=1' }
 config.font_size = 13
 config.hide_tab_bar_if_only_one_tab = true
