@@ -43,6 +43,21 @@
   # list branches sorted by last modified
   b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
+  # difftool aliases
+  # difftastic
+
+  dcom = "!f() { GIT_EXTERNAL_DIFF=difft git show HEAD --ext-diff; }; f";
+  dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
+  dfft = "difftool -t difftastic";
+
+
+  # kaleidoscope
+  kcom = "!f() { GIT_EXTERNAL_DIFF=kale git show HEAD --ext-diff; }; f";
+  klog = "!f() { GIT_EXTERNAL_DIFF=kale git log -p --ext-diff; }; f";
+  dffk = "difftool -t kale";
+
+
+
   # list aliases
   la = "!git config -l | grep alias | cut -c 7-"
 
