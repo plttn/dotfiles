@@ -18,3 +18,5 @@ end
 # pnpm end
 
 source ~/.asdf/asdf.fish
+
+starship init fish | source
