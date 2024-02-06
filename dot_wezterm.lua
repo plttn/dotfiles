@@ -19,8 +19,8 @@ config.font = wezterm.font('CommitMono')
 config.harfbuzz_features = { 'ss03=on ss04=on ss05=on cv07=on cv08=on' }
 config.font_size = 13
 config.hide_tab_bar_if_only_one_tab = true
-config.initial_cols = 110
-config.initial_rows = 30
+config.initial_cols = 115
+config.initial_rows = 58
 front_end = 'WebGpu'
 config.default_cursor_style = 'SteadyBar'
 config.hide_mouse_cursor_when_typing = true
