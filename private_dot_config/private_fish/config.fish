@@ -19,4 +19,4 @@ end
 
 source ~/.asdf/asdf.fish
 
-starship init fish | source
+# starship init fish | source
