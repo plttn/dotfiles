@@ -3,9 +3,9 @@
 [include]
     path = /Users/jack/.gitconfig.d/themes.gitconfig
 [user]
-    email = "{{- .email }}"
-	name = "{{- .name }}"
-    signingkey = {{ .signingkey }}
+    email = "jack@platten.me"
+	name = "Jack Platten"
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG
 
 [alias]
   # one-line log
@@ -126,14 +126,11 @@
 
 [pager]
         difftool = true
-
-{{- if eq .chezmoi.os "darwin" }}
 [difftool "kale"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "kale"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
-{{- end }}
 [difftool]
   prompt = false
   trustExitCode = true
@@ -141,3 +138,5 @@
 	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = true
+[pull]
+	rebase = false
