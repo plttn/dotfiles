@@ -16,7 +16,7 @@ end
 config.color_scheme = 'Brogrammer'
 
 config.font = wezterm.font('Berkeley Mono')
--- config.harfbuzz_features = { 'ss03=on ss04=on ss05=on cv07=on cv08=on' }
+config.harfbuzz_features = { 'calt=0' } --disable ligatures for Berkeley Mono
 config.font_size = 13
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 115
