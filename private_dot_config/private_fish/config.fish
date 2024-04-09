@@ -17,7 +17,7 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 
-source ~/.asdf/asdf.fish
+# source ~/.asdf/asdf.fish
 
 mise activate fish | source
 
