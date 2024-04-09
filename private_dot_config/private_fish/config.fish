@@ -19,6 +19,8 @@ end
 
 source ~/.asdf/asdf.fish
 
+mise activate fish | source
+
 # starship init fish | source
 
 # tabtab source for packages
