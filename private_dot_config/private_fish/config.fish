@@ -6,6 +6,12 @@ if status is-interactive
      export LS_COLORS="$(vivid generate molokai)"
 end
 
+if status is-interactive
+  mise activate fish | source
+else
+  mise activate fish --shims | source
+end
+
 
 zoxide init fish | source
 
@@ -19,7 +25,6 @@ end
 
 # source ~/.asdf/asdf.fish
 
-mise activate fish | source
 
 # starship init fish | source
 
