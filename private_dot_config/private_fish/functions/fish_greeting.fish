@@ -1,2 +1,2 @@
-uname -nmsr
-uptime
+#uname -nmsr
+#uptime
