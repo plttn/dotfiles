@@ -20,6 +20,7 @@ end
 # source ~/.asdf/asdf.fish
 # direnv hook fish | source
 
+abbr --position command kssh "kitten ssh"
 
 # starship init fish | source
 
