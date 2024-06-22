@@ -1,2 +1,4 @@
 Host *
     VerifyHostKeyDNS yes
+Host unifi
+    SetEnv TERM=xterm-256color
