@@ -22,7 +22,7 @@ end
 
 abbr --position command kssh "kitten ssh"
 
-# starship init fish | source
+starship init fish | source
 
 # tabtab source for packages
 # uninstall by removing these lines
