@@ -1,4 +1,5 @@
-set --export fish_color_autosuggestion 555
+# set --export fish_color_autosuggestion 555
+set -g tide_right_prompt_suffix " "
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -22,7 +23,7 @@ end
 
 abbr --position command kssh "kitten ssh"
 
-starship init fish | source
+#starship init fish | source
 
 # tabtab source for packages
 # uninstall by removing these lines
