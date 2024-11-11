@@ -1,5 +1,6 @@
 theme = Monokai Remastered
 font-family = Berkeley Mono
+font-size = 13
 
 # Disable ligatures
 font-feature = -calt
