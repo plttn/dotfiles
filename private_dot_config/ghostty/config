@@ -1,0 +1,7 @@
+theme = Brogrammer
+font-family = Berkeley Mono
+
+# Disable ligatures
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
