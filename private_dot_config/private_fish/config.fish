@@ -1,5 +1,5 @@
 # set --export fish_color_autosuggestion 555
-set -g tide_right_prompt_suffix " "
+#set -g tide_right_prompt_suffix " "
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
