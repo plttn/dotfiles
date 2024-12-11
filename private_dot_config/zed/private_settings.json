@@ -9,9 +9,10 @@
 {
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
-    },
+
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+   },
     "version": "2"
   },
   "features": {
@@ -26,8 +27,17 @@
   "buffer_font_features": { "calt": false },
   "inlay_hints": {
     "enabled": true,
-    "show_type_hints": true,
-    "show_parameter_hints": true,
+
+    "show_type_hints": false,
+   "show_parameter_hints": true,
     "show_other_hints": true
+  },
+  "tabs": {
+    "file_icons": true
+  },
+  "languages": {
+    "Astro": {
+      "language_servers": ["eslint"]
+    }
   }
 }
