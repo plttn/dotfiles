@@ -1,8 +1,7 @@
-
-theme = Brogrammer
-ont-family = Berkeley Mono
-
+theme = Monokai Remastered
+font-family = TX-02
 font-size = 12
+
 # Disable ligatures
 font-feature = -calt
 font-feature = -liga
