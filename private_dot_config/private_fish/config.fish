@@ -6,6 +6,7 @@ set -g EZA_CONFIG_DIR "$HOME/.config/eza"
 if status is-interactive
     # Commands to run in interactive sessions can go here
     atuin init fish | source
+    #export LS_COLORS="$(vivid generate molokai)"
 end
 
 
@@ -21,6 +22,9 @@ end
 
 # source ~/.asdf/asdf.fish
 # direnv hook fish | source
+
+#abbr --position command kssh "kitten ssh"
+
 #starship init fish | source
 
 # tabtab source for packages
