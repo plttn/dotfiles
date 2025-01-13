@@ -6,8 +6,9 @@ set -g EZA_CONFIG_DIR "$HOME/.config/eza"
 if status is-interactive
     # Commands to run in interactive sessions can go here
     atuin init fish | source
-    #export LS_COLORS="$(vivid generate molokai)"
-end
+
+    export LS_COLORS="$(vivid generate molokai)"
+nd
 
 
 zoxide init fish | source
