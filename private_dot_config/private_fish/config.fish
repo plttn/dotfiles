@@ -8,8 +8,8 @@ if status is-interactive
     atuin init fish | source
 
     export LS_COLORS="$(vivid generate molokai)"
-nd
 
+end
 
 zoxide init fish | source
 
