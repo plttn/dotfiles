@@ -15,8 +15,9 @@
     "version": "2"
   },
   "features": {
-    "inline_completion_provider": "none",
-    "copilot": false
+
+    "edit_prediction_provider": "zed",
+   "copilot": false
   },
   "base_keymap": "VSCode",
   "theme": "Zedokai",
@@ -26,8 +27,9 @@
   "buffer_font_features": { "calt": false },
   "inlay_hints": {
     "enabled": true,
-    "show_type_hints": false,
-    "show_parameter_hints": true,
+
+    "show_type_hints": true,
+   "show_parameter_hints": true,
     "show_other_hints": true
   },
   "tabs": {

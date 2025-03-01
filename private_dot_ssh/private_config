@@ -3,6 +3,9 @@
 # This won't be added again if you remove it.
 Include ~/.orbstack/ssh/config
 
+  Host iceberg.jkp.sh
+    HostName iceberg.jkp.sh
+
 Host *
     VerifyHostKeyDNS yes
 Host unifi
