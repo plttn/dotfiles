@@ -25,40 +25,38 @@
   lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
 
-  a = add
-  ap = add -p
-  c = commit --verbose
-  ca = commit -a --verbose
-  cm = commit -m
-  cam = commit -a -m
-  m = commit --amend --verbose
-  
-  d = diff
-  ds = diff --stat
-  dc = diff --cached
 
-  s = status -s
-  co = checkout
-  cob = checkout -b
-  # list branches sorted by last modified
+  # a = add
+  # ap = add -p
+  # c = commit --verbose
+  # ca = commit -a --verbose
+  # cm = commit -m
+  # cam = commit -a -m
+  # m = commit --amend --verbose
+ 
+   # list branches sorted by last modified
   b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
   # difftool aliases
-  # difftastic
 
-  dcom = "!f() { GIT_EXTERNAL_DIFF=difft git show HEAD --ext-diff; }; f";
-  dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff; }; f";
-  dfft = "difftool -t difftastic";
+    # `git log` with patches shown with difftastic.
+   dl = -c diff.external=difft log -p --ext-diff
 
+
+    # Show the most recent commit with difftastic.
+    ds = -c diff.external=difft show --ext-diff
+    # `git diff` with difftastic.
+
+    dft = -c diff.external=difft diff
 
   # kaleidoscope
   kcom = "!f() { GIT_EXTERNAL_DIFF=ksdiff git show HEAD --ext-diff; }; f";
   klog = "!f() { GIT_EXTERNAL_DIFF=ksdiff git log -p --ext-diff; }; f";
   dffk = "difftool -t kale";
 
-  dl = "!git ll -1"
-  dlc = diff --cached HEAD^
 
+  # dl = "!git ll -1"
+  # dlc = diff --cached HEAD^
 
 
   # list aliases
@@ -124,10 +122,7 @@
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
   path = /Users/jack/.gitconfig.d/gitlab.conf
 
-[difftool "difftastic"]
-        cmd = difft "$LOCAL" "$REMOTE"
-
-[pager]
+[[pager]
         difftool = true
 [difftool "kale"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
