@@ -33,4 +33,4 @@ end
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 /Users/jack/.local/bin/mise activate fish | source
 
-scheme set chezmoi
+scheme set monokai
