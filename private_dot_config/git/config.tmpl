@@ -26,28 +26,31 @@
 
 
 
-  # a = add
+ # a = add
   # ap = add -p
   # c = commit --verbose
   # ca = commit -a --verbose
   # cm = commit -m
   # cam = commit -a -m
   # m = commit --amend --verbose
- 
-   # list branches sorted by last modified
-  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+  
+
+  # list branches sorted by last modified
+ b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
   # difftool aliases
 
-    # `git log` with patches shown with difftastic.
-   dl = -c diff.external=difft log -p --ext-diff
+   # `git log` with patches shown with difftastic.
 
-
+    dl = -c diff.external=difft log -p --ext-diff
     # Show the most recent commit with difftastic.
     ds = -c diff.external=difft show --ext-diff
+
     # `git diff` with difftastic.
 
-    dft = -c diff.external=difft diff
+   dft = -c diff.external=difft diff
+
 
   # kaleidoscope
   kcom = "!f() { GIT_EXTERNAL_DIFF=ksdiff git show HEAD --ext-diff; }; f";
@@ -55,8 +58,9 @@
   dffk = "difftool -t kale";
 
 
-  # dl = "!git ll -1"
+ # dl = "!git ll -1"
   # dlc = diff --cached HEAD^
+
 
 
   # list aliases
@@ -122,8 +126,10 @@
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
   path = /Users/jack/.gitconfig.d/gitlab.conf
 
-[[pager]
-        difftool = true
+
+
+[pager]
+       difftool = true
 [difftool "kale"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "kale"]
