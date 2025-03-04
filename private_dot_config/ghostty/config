@@ -18,3 +18,6 @@ mouse-hide-while-typing = true
 # background-opacity = .9
 # background-blur-radius = 20
 
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind
