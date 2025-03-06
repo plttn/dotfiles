@@ -1,0 +1,11 @@
+[tools]
+node = "20"
+pnpm = "latest"
+go = "1.22"
+python = "3.12"
+1password-cli = "latest"
+deno = "latest"
+usage = "latest"
+
+[settings]
+experimental = true
