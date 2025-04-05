@@ -8,5 +8,9 @@ Include ~/.orbstack/ssh/config
 
 Host *
     VerifyHostKeyDNS yes
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%C
+    ControlPersist 5m
 Host unifi
     SetEnv TERM=xterm-256color
+
