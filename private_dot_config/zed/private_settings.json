@@ -16,27 +16,23 @@
     "version": "2"
   },
   "features": {
-
     "edit_prediction_provider": "zed",
+
     "copilot": false
-
   },
- "base_keymap": "VSCode",
+  "base_keymap": "VSCode",
   "theme": "Zedokai",
-
   // "ui_font_size": 14,
- "buffer_font_size": 12,
+  "buffer_font_size": 12,
   "buffer_font_family": "TX-02",
   "buffer_font_fallbacks": ["Symbols Nerd Font Mono"],
   "buffer_font_features": { "calt": false },
   "inlay_hints": {
     "enabled": true,
-
     "show_type_hints": false,
-   "show_parameter_hints": true,
-
+    "show_parameter_hints": true,
     "show_other_hints": true
- },
+  },
   "tabs": {
     "file_icons": true
   },
@@ -44,7 +40,6 @@
     "Astro": {
       "language_servers": ["eslint"]
     }
-
   },
- "terminal": {}
+  "terminal": {}
 }
