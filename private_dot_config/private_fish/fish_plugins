@@ -5,5 +5,6 @@ nickeb96/puffer-fish
 krank56/copilot.fish
 h-matsuo/fish-color-scheme-switcher
 halostatue/fish-chezmoi@v1
-plttn/tide@v6
-~/.local/bin/mise
+ilancosman/clownfish
+icezyclon/zoxide.fish
+~/Developer/tide

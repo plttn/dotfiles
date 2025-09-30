@@ -7,39 +7,60 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "icon_theme": "Zed (Default)",
-  "assistant": {
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
+    "git": {
+        "inline_blame": {
+            "enabled": true,
+            "show_commit_summary": false
+        }
     },
-    "version": "2"
-  },
-  "features": {
-    "edit_prediction_provider": "zed",
-
-    "copilot": false
-  },
-  "base_keymap": "VSCode",
-  "theme": "Zedokai",
-  // "ui_font_size": 14,
-  "buffer_font_size": 12,
-  "buffer_font_family": "TX-02",
-  "buffer_font_fallbacks": ["Symbols Nerd Font Mono"],
-  "buffer_font_features": { "calt": false },
-  "inlay_hints": {
-    "enabled": true,
-    "show_type_hints": false,
-    "show_parameter_hints": true,
-    "show_other_hints": true
-  },
-  "tabs": {
-    "file_icons": true
-  },
-  "languages": {
-    "Astro": {
-      "language_servers": ["eslint"]
+    "auto_indent_on_paste": true,
+    "wrap_guides": [80],
+    "tab_size": 4,
+    "autosave": "on_window_change",
+    "multi_cursor_modifier": "cmd_or_ctrl",
+    "minimap": {
+        "show": "auto"
+    },
+    "current_line_highlight": "all",
+    "cursor_blink": true,
+    "icon_theme": "Zed (Default)",
+    "agent": {
+        "button": true,
+        "enabled": true,
+        "default_model": {
+            "provider": "copilot_chat",
+            "model": "gpt-4o"
+        },
+        "version": "2"
+    },
+    "features": {
+        "edit_prediction_provider": "zed",
+        "copilot": false
+    },
+    "base_keymap": "VSCode",
+    "theme": "Zedokai",
+    // "ui_font_size": 14,
+    "buffer_font_size": 12,
+    "buffer_font_family": "TX-02",
+    "buffer_font_fallbacks": ["Symbols Nerd Font Mono"],
+    "buffer_font_features": { "calt": false },
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": false,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+    },
+    "tabs": {
+        "file_icons": true
+    },
+    "languages": {
+        "Astro": {
+            "language_servers": ["eslint"]
+        }
+    },
+    "terminal": {
+        "blinking": "on",
+        "font_family": "TX-02",
+        "font_size": 12.0
     }
-  },
-  "terminal": {}
 }
