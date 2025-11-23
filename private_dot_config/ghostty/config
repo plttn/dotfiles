@@ -25,3 +25,4 @@ keybind = alt+right=unbind
 bell-features = attention, title
 macos-option-as-alt = true
 macos-auto-secure-input
+macos-titlebar-style = tabs

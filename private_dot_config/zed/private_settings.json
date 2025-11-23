@@ -19,7 +19,9 @@
     "autosave": "on_window_change",
     "multi_cursor_modifier": "cmd_or_ctrl",
     "minimap": {
-        "show": "auto"
+        "current_line_highlight": "all",
+        "thumb": "always",
+        "show": "always"
     },
     "current_line_highlight": "all",
     "cursor_blink": true,
@@ -31,7 +33,6 @@
             "provider": "copilot_chat",
             "model": "gpt-4o"
         },
-        "version": "2"
     },
     "features": {
         "edit_prediction_provider": "zed",

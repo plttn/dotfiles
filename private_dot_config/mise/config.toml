@@ -3,9 +3,10 @@ node = "20"
 go = "1.24"
 deno = "latest"
 usage = "latest"
-1password = "2.31.1"
+1password = "latest"
 youtube-dl = "latest"
 python = "latest"
+pnpm = "10"
 
 [settings]
 experimental = true
