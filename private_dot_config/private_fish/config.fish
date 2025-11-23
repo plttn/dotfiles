@@ -23,3 +23,4 @@ end
 #scheme set monokai
 ~/.local/bin/mise activate fish | source
 bind up _atuin_bind_up
+set -g fish_transient_prompt 1
