@@ -1,0 +1,38 @@
+# Halloy config.
+#
+# For a complete list of available options,
+# please visit https://halloy.squidowl.org/configuration/index.html
+
+# [servers.liberachat]
+# nickname = "halloy5047"
+# server = "irc.libera.chat"
+# channels = ["#halloy"]
+
+# [servers."social.lol"]
+# server = "bnc.irccloud.com"
+# nickname = "bnc"
+# password = "2279b495e42562b950448ff639067644"
+
+theme = "Macaw Dark"
+
+[font]
+family = "TX-02"
+
+[servers.omglol]
+server = "irc.social.lol"
+nickname = "jack"
+
+[servers.omglol.sasl.plain]
+username = "jack"
+password_file = "~/.config/halloy/password"
+
+[actions.buffer]
+click_channel_name = "replace-pane"
+click_highlight = "replace-pane"
+click_username = "replace-pane"
+local = "replace-pane"
+message_channel = "replace-pane"
+message_user = "replace-pane"
+
+[actions.sidebar]
+buffer = "replace-pane"
