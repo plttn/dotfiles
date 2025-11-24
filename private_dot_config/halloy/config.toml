@@ -26,3 +26,19 @@ message_user = "replace-pane"
 
 [actions.sidebar]
 buffer = "replace-pane"
+
+[buffer.timestamp]
+format = "%I:%M %p"
+
+
+# Type: string
+# Values: "solid", "unique"
+# Default: "unique"
+
+[buffer.channel.nicklist]
+color = "unique"
+away = { dimmed = 0.5 }
+
+[buffer.nickname]
+color = "unique"
+away = { dimmed = 0.5 }
