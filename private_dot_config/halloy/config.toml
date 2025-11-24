@@ -3,16 +3,6 @@
 # For a complete list of available options,
 # please visit https://halloy.squidowl.org/configuration/index.html
 
-# [servers.liberachat]
-# nickname = "halloy5047"
-# server = "irc.libera.chat"
-# channels = ["#halloy"]
-
-# [servers."social.lol"]
-# server = "bnc.irccloud.com"
-# nickname = "bnc"
-# password = "2279b495e42562b950448ff639067644"
-
 theme = "Macaw Dark"
 
 [font]
