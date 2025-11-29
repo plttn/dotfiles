@@ -30,6 +30,9 @@ buffer = "replace-pane"
 [buffer.timestamp]
 format = "%I:%M %p"
 
+[buffer.text_input]
+auto_format = "markdown"
+
 
 # Type: string
 # Values: "solid", "unique"
