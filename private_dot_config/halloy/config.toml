@@ -39,9 +39,14 @@ auto_format = "markdown"
 # Default: "unique"
 
 [buffer.channel.nicklist]
-color = "unique"
 away = { dimmed = 0.5 }
 
 [buffer.nickname]
-color = "unique"
 away = { dimmed = 0.5 }
+
+[buffer.internal_messages.success]
+smart = 180
+[buffer.internal_messages.error]
+smart = 180
+[buffer.server_messages.topic]
+enabled = false
