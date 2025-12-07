@@ -50,3 +50,10 @@ smart = 180
 smart = 180
 [buffer.server_messages.topic]
 enabled = false
+
+[notifications]
+direct_message = { sound = "peck", show_toast = true }
+
+[notifications.highlight]
+sound = "dong"
+exclude = { users = ["NickServ"], channels = ["#halloy"] }
