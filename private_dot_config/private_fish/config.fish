@@ -2,8 +2,7 @@ set -g EZA_CONFIG_DIR "$HOME/.config/eza"
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    atuin init fish --disable-up-arrow | source
-
+    atuin init fish | source
     export LS_COLORS="$(vivid generate molokai)"
 
 end
@@ -22,5 +21,4 @@ end
 
 #scheme set monokai
 ~/.local/bin/mise activate fish | source
-bind up _atuin_bind_up
 set -g fish_transient_prompt 1
