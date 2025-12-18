@@ -26,4 +26,4 @@ bell-features = attention, title
 macos-option-as-alt = true
 macos-auto-secure-input
 macos-titlebar-style = transparent
-# macos-icon = xray
+shell-integration-features = sudo, ssh-terminfo,ssh-env
