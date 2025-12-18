@@ -3,3 +3,6 @@
 
 
 add_newline = false
+[directory]
+repo_root_style = 'blue'
+before_repo_root_style = 'cyan'
