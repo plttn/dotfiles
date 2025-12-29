@@ -6,7 +6,7 @@
 theme = "Macaw Dark"
 
 [font]
-family = "TX-02"
+family = "Berkeley Mono"
 
 [servers.omglol]
 server = "irc.social.lol"

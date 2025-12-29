@@ -19,6 +19,6 @@ end
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
 
-#scheme set monokai
+scheme set monokai
 ~/.local/bin/mise activate fish | source
 set -g fish_transient_prompt 1

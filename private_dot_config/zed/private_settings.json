@@ -7,12 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "buffer_line_height": "standard",
     "colorize_brackets": true,
     "git": {
         "inline_blame": {
             "enabled": true,
-            "show_commit_summary": false
-        }
+            "show_commit_summary": false,
+        },
     },
     "auto_indent_on_paste": true,
     "wrap_guides": [80],
@@ -22,47 +23,49 @@
     "minimap": {
         "current_line_highlight": "all",
         "thumb": "always",
-        "show": "always"
+        "show": "always",
     },
     "current_line_highlight": "all",
     "cursor_blink": true,
     "icon_theme": "Zed (Default)",
     "agent": {
+        "always_allow_tool_actions": true,
+        "default_profile": "write",
         "button": true,
         "enabled": true,
         "default_model": {
             "provider": "copilot_chat",
-            "model": "gpt-5-mini"
+            "model": "gpt-5-mini",
         },
     },
     "features": {
-        "edit_prediction_provider": "zed",
-        "copilot": false
+        "edit_prediction_provider": "copilot",
     },
     "base_keymap": "VSCode",
     "theme": "Zedokai",
     // "ui_font_size": 14,
     "buffer_font_size": 12,
-    "buffer_font_family": "TX-02",
+    "buffer_font_family": "Berkeley Mono",
     "buffer_font_fallbacks": ["Symbols Nerd Font Mono"],
     "buffer_font_features": { "calt": false },
     "inlay_hints": {
         "enabled": true,
         "show_type_hints": false,
         "show_parameter_hints": true,
-        "show_other_hints": true
+        "show_other_hints": true,
     },
     "tabs": {
-        "file_icons": true
+        "file_icons": true,
     },
     "languages": {
         "Astro": {
-            "language_servers": ["eslint"]
-        }
+            "language_servers": ["eslint"],
+        },
     },
     "terminal": {
+        "cursor_shape": "bar",
         "blinking": "on",
-        "font_family": "TX-02",
-        "font_size": 12.0
-    }
+        "font_family": "Berkeley Mono",
+        "font_size": 12.0,
+    },
 }
