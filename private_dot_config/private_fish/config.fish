@@ -22,3 +22,8 @@ end
 scheme set monokai
 ~/.local/bin/mise activate fish | source
 set -g fish_transient_prompt 1
+fish_default_key_bindings
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
