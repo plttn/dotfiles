@@ -23,4 +23,4 @@ mouse-hide-while-typing = true
 macos-option-as-alt = true
 macos-auto-secure-input
 macos-titlebar-style = transparent
-shell-integration-features = sudo, ssh-terminfo,ssh-env
+shell-integration-features = sudo,ssh-terminfo,ssh-env
