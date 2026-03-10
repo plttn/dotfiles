@@ -18,4 +18,3 @@ sign-on-push = true
 
 
 [aliases]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
