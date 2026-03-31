@@ -8,22 +8,22 @@
 {{- $interactive := stdinIsATTY -}}
 {{- $name := promptStringOnce . "name" "Name" -}}
 {{- $email := promptStringOnce . "email" "Email" -}}
-{{- $signingKeyOpReference := promptStringOnce . "signingKeyOpReference" "op:// secret reference" -}}
-{- $signingKeyOpReference = trimAll '"' $signingKeyOpReference -}}
+{{- $signingKeyOpReference := promptStringOnce . "signingKeyOpReference" "op:// secret reference" | trimAll "\"" -}}
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
-{{ $computerName := .chezmoi.hostname }}
+{{- $computerName := .chezmoi.hostname -}}
 {{- if eq .chezmoi.os "darwin" -}}
-{{ $computerName = output "scutil" "--get" "ComputerName" | trim }}
-{{ end -}}
-sourceDir = "{{ .chezmoi.sourceDir }}"
+{{- $computerName = output "scutil" "--get" "ComputerName" | trim -}}
+{{- end -}}
+sourceDir = "{{ .chezmoi.sourceDir -}}"
 [data]
   name = {{ $name | quote}}
   email =  {{ $email | quote }}
   is_wsl = {{ $is_wsl }}
   computer_name = {{ $computerName | quote }}
   os = {{ .chezmoi.os | quote }}
+  signingKeyOpReference = {{ $signingKeyOpReference | quote }}
   signingkey = {{ onepasswordRead $signingKeyOpReference | quote }}
 
 [git]
