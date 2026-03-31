@@ -14,7 +14,7 @@ nickname = "jack"
 
 [servers.omglol.sasl.plain]
 username = "jack"
-password_file = "~/.config/halloy/password"
+password_file = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.config{{ .chezmoi.pathSeparator }}halloy{{ .chezmoi.pathSeparator }}password"
 
 [actions.buffer]
 click_channel_name = "replace-pane"

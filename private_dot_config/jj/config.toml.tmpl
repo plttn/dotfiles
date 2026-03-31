@@ -15,7 +15,7 @@ editor = "nano"
 behavior = "drop"
 backend = "ssh"
 key = "{{ .signingkey }}"
-backends.ssh.allowed-signers = "~{{ .chezmoi.pathSeparator }}.ssh{{ .chezmoi.pathSeparator }}allowed_signers"
+backends.ssh.allowed-signers = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.ssh{{ .chezmoi.pathSeparator }}allowed_signers"
 
 
 [git]
