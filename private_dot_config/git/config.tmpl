@@ -2,7 +2,7 @@
 	defaultBranch = main
 
 [include]
-	path = /Users/jack/.gitconfig.d/themes.gitconfig
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}themes.gitconfig"
 	
 [user]
 	email = "{{ .email }}"
