@@ -82,20 +82,19 @@
 [push]
 	autoSetupRemote = true
 	followTags = true
-
-
+	
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
-	path = /Users/jack/.gitconfig.d/github.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}github.conf"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-	path = /Users/jack/.gitconfig.d/github.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}github.conf"
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
-	path = /Users/jack/.gitconfig.d/github.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}github.conf"
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
-	path = /Users/jack/.gitconfig.d/gitlab.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}gitlab.conf"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-	path = /Users/jack/.gitconfig.d/gitlab.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}gitlab.conf"
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-	path = /Users/jack/.gitconfig.d/gitlab.conf
+	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}gitlab.conf"
 
 [pager]
 	difftool = true
