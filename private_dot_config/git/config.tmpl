@@ -55,7 +55,7 @@
 	required = true
 [core]
 	editor = nano
-	excludesfile = /Users/jack/.config/git/ignore
+	excludesfile = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.config{{ .chezmoi.pathSeparator }}git{{ .chezmoi.pathSeparator }}ignore"
 
 [interactive]
 	diffFilter = delta --color-only
