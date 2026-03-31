@@ -1,0 +1,40 @@
+# General
+.DS_Store
+__MACOSX/
+.AppleDouble
+.LSOverride
+Icon[
+]
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# https://mise.jdx.dev/configuration.html
+# https://mise.jdx.dev/configuration/environments.html
+.mise.*.local.toml
+.mise.local.toml
+mise.*.local.toml
+mise.local.toml
+.mise/*.local.toml
+mise/*.local.toml
+
+# https://mise.jdx.dev/configuration.html#tool-versions
+#.tool-versions
+
+.vscode/settings.json
