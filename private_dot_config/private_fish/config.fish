@@ -7,6 +7,7 @@ if status is-interactive
 
 end
 
+# eval "$(atuin hex init)"
 #zoxide init fish | source
 # pnpm
 # set -gx PNPM_HOME "/Users/jack/Library/pnpm"
