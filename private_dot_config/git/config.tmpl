@@ -5,9 +5,9 @@
 	path = /Users/jack/.gitconfig.d/themes.gitconfig
 	
 [user]
-	email = "jack@platten.me"
-	name = "Jack Platten"
-	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG"
+	email = "{{ .chezmoi.email }}"
+	name = "{{ .chezmoi.name }}"
+	signingkey = "{{ .chezmoi.signingkey }}"
 
 [alias]
 	# one-line log
@@ -54,7 +54,7 @@
 	process = git-lfs filter-process
 	required = true
 [core]
-	editor = code --wait
+	editor = nano
 	excludesfile = /Users/jack/.config/git/ignore
 
 [interactive]
@@ -68,10 +68,8 @@
 	conflictstyle = diff3
 
 [diff]
+	external = difft
 	colorMoved = default
-
-
-
 [gpg "ssh"]
 	allowedSignersFile = /Users/jack/.ssh/allowed_signers
 
@@ -109,9 +107,22 @@
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
 
+[difftool "difftastic"]
+    # See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
 [difftool]
 	prompt = false
-	trustExitCode = true
+
+[pager]
+    # Use a pager if the difftool output is larger than one screenful,
+    # consistent with the behaviour of `git diff`.
+    difftool = true
+
+[diff]
+    # Set difftastic as the default difftool, so we don't need to specify
+    # `-t difftastic` every time.
+    tool = difftastic
 
 [gpg]
 	program = /opt/homebrew/bin/gpg
@@ -124,3 +135,5 @@
 [merge "mergiraf"]
     name = mergiraf
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+[gitget]
+    root = ~/Developer
