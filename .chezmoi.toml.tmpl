@@ -6,11 +6,9 @@
 {{ end }}
 {{- /* Checks if running interactively, which is not the case for GitHub Codespaces */ -}}
 {{- $interactive := stdinIsATTY -}}
-{{- /* Initializes the name variable with a default value */ -}}
-{{-   $name := promptStringOnce . "name" "Name" -}}
-{{- /* Does the same for the email */ -}}
-{{-   $email := promptStringOnce . "email" "Email" -}}
-{{- $signingKeyOpReference := promptStringOnce . keyReference "op:// secret reference" -}}
+{{- $name := promptStringOnce . "name" "Name" -}}
+{{- $email := promptStringOnce . "email" "Email" -}}
+{{- $signingKeyOpReference := promptStringOnce . "signingKeyOpReference" "op:// secret reference" -}}
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -25,7 +23,7 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
   is_wsl = {{ $is_wsl }}
   computer_name = {{ $computerName | quote }}
   os = {{ .chezmoi.os | quote }}
-  signingkey = {{ onepasswordRead $signingKeyOpReference | quote }}
+  signingkey = {{ onepasswordRead $signingKeyOpReference }}
 
 [git]
   autoCommit = true
