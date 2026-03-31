@@ -1,4 +1,4 @@
-'$schema' = 'https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}jj-vcs.github.io{{ .chezmoi.pathSeparator }}jj{{ .chezmoi.pathSeparator }}latest{{ .chezmoi.pathSeparator }}config-schema.{{ .chezmoi.config.format }}'
+'$schema' = 'https://jj-vcs.github.io/jj/latest/config-schema.json'
 
 [user]
 name = "{{ .name }}"
@@ -14,11 +14,11 @@ editor = "nano"
 [signing]
 behavior = "drop"
 backend = "ssh"
-key = "{{ .signingkey }} Personal"
+key = "{{ .signingkey }}"
 backends.ssh.allowed-signers = "~{{ .chezmoi.pathSeparator }}.ssh{{ .chezmoi.pathSeparator }}allowed_signers"
 
 
-[{{ .chezmoi.config.git.command }}]
+[git]
 sign-on-push = true
 write-change-id-header = true
 
@@ -28,5 +28,5 @@ bookmark-advance-to = 'closest_pushable(@)'
 [revset-aliases]
 # Closest revision that is mutable, described and either non-empty or a merge
 'closest_pushable(to)' = '''
-  heads({{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathListSeparator }}to & mutable() & ~description(exact{{ .chezmoi.pathListSeparator }}"") & (~empty() | merges()))
+  heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))
 '''
