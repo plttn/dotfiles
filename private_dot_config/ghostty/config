@@ -15,7 +15,7 @@ window-width = 105
 
 mouse-hide-while-typing = true
 
-background-opacity = .8
+background-opacity = .7 
 background-blur = macos-glass-regular
 # background-blur-radius = 20
 #keybind = alt+left=unbind
@@ -26,3 +26,5 @@ macos-auto-secure-input
 macos-titlebar-style = transparent
 shell-integration-features = sudo,ssh-terminfo,ssh-env
 shell-integration = fish
+keybind = global:cmd+quote=toggle_quick_terminal
+
