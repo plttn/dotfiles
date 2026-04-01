@@ -7,5 +7,4 @@ h-matsuo/fish-color-scheme-switcher
 halostatue/fish-chezmoi@v1
 ilancosman/clownfish
 icezyclon/zoxide.fish
-~/Developer/github.com/plttn/tide
-~/Developer/github.com/nertzy/fish_jj_prompt
+plttn/tide@v7
