@@ -16,6 +16,7 @@
 {{- if eq .chezmoi.os "darwin" -}}
 {{- $computerName = output "scutil" "--get" "ComputerName" | trim -}}
 {{- end -}}
+{{- $signingKey := onepasswordRead $signingKeyOpReference -}}
 sourceDir = "{{ .chezmoi.sourceDir -}}"
 [data]
   name = {{ $name | quote}}
@@ -23,8 +24,7 @@ sourceDir = "{{ .chezmoi.sourceDir -}}"
   is_wsl = {{ $is_wsl }}
   computer_name = {{ $computerName | quote }}
   os = {{ .chezmoi.os | quote }}
-  signingKeyOpReference = {{ $signingKeyOpReference | quote }}
-  signingkey = {{ onepasswordRead $signingKeyOpReference | quote }}
+  signingkey = {{ $signingKey | quote }}
 
 [git]
   autoCommit = true
