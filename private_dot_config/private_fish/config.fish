@@ -25,6 +25,8 @@ scheme set monokai
 set -g fish_transient_prompt 1
 fish_default_key_bindings
 
+set -g fish_jj_prompt_show_description false
+
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
