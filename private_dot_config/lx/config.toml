@@ -90,33 +90,35 @@ all = true
 inherits = "default"
 format = "long2"
 group-dirs = "first"
+level = 2
 tree = true
 
 [personality.ls]
 grid = true
-across = true
+across = false
 ## (no inherits — standalone, mimics plain ls)
 
 ## Custom personalities — define your own and symlink lx to the name
 ## for argv[0] dispatch.
 
-# [personality.lt]
-# inherits = "ll"
-# sort = "age"
+[personality.lt]
+inherits = "ll"
+group-dirs = "none"
+sort = "age"
 
 # [personality.recent]
 # format = "long"
 # sort = "modified"
 # reverse = true
 
-# [personality.du]
-# columns = ["size"]
-# only-dirs = true
-# tree = true
-# level = 2
-# sort = "size"
-# reverse = true
-# total-size = true
+[personality.ldu]
+columns = ["size"]
+only-dirs = true
+tree = true
+level = 2
+sort = "size"
+reverse = true
+total-size = true
 
 
 ## ── Conditional overrides ─────────────────────────────────────────
