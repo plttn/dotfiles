@@ -136,3 +136,9 @@
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [gitget]
     root = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}Developer"
+[credential "https://github.com"]
+       helper =
+       helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+       helper =
+       helper = !/opt/homebrew/bin/gh auth git-credential
