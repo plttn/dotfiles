@@ -16,7 +16,7 @@ window-width = 105
 
 mouse-hide-while-typing = true
 
-background-opacity = .7 
+background-opacity = .8
 background-blur = macos-glass-regular
 # background-blur-radius = 20
 #keybind = alt+left=unbind
