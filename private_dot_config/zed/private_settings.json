@@ -7,14 +7,30 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "theme": "Monokai Pro (CE)",
+    "icon_theme": "Zed (Default)",
+    "project_panel": {
+        "dock": "left"
+    },
+    "outline_panel": {
+        "dock": "right"
+    },
+    "collaboration_panel": {
+        "dock": "right"
+    },
+    "git_panel": {
+        "dock": "left"
+    },
     "ui_font_weight": 400.0,
     "ui_font_size": 16.0,
     "ui_font_family": ".ZedSans",
     "edit_predictions": {
+        "copilot": {
+            "enable_next_edit_suggestions": true
+        },
         "provider": "copilot",
     },
     "buffer_line_height": "standard",
-    "colorize_brackets": true,
     "git": {
         "inline_blame": {
             "enabled": true,
@@ -33,8 +49,9 @@
     },
     "current_line_highlight": "all",
     "cursor_blink": true,
-    "icon_theme": "Bearded Icon Theme",
     "agent": {
+        "sidebar_side": "right",
+        "dock": "right",
         "tool_permissions": {
             "default": "allow"
         },
@@ -47,7 +64,6 @@
         },
     },
     "base_keymap": "VSCode",
-    "theme": "Monokai Pro (CE)",
     // "ui_font_size": 14,
     "buffer_font_size": 12,
     "buffer_font_family": "Berkeley Mono",
