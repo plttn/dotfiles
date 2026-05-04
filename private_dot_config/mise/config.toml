@@ -2,7 +2,6 @@
 node = "20"
 go = "latest"
 usage = "latest"
-1password = "latest"
 python = "latest"
 pnpm = "10"
 rust = "1.92.0"
