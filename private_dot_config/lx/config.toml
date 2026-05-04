@@ -64,8 +64,25 @@ time-style = "default" # default / iso / long-iso / full-iso
 group-dirs = "none"    # first / last / none
 icons = "never"        # always / auto / never
 classify = "auto"      # always / auto / never
-theme = "lx-24bit"     # named theme (see below)
-smooth = true
+# theme = "lx-24bit"     # named theme (see below)
+#smooth = true
+[[personality.default.when]]
+env.TERM = "*-256color"       # glob match — any 256-colour terminfo
+theme = "lx-256"
+
+[[personality.default.when]]
+env.COLORTERM = ["truecolor", "24bit"]   # array — any element matches
+theme = "lx-24bit"
+
+## On macOS, listxattr is disproportionately expensive (it dominates
+## tree traversal time on APFS).  Disable the `@` indicator probe by
+## default; users who want the indicator can override per-personality
+## with `xattr-indicator = true`, or pass `-l@` per invocation.
+
+[[personality.default.when]]
+platform = "macos"
+xattr-indicator = false
+
 
 ## The "lx" personality applies when the binary is invoked as "lx".
 [personality.lx]
