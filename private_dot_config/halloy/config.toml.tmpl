@@ -1,5 +1,5 @@
 {{ $dir := dir .chezmoi.targetFile -}}
-{{ $password := joinPath $dir "password" -}}
+{{ $password_file := joinPath $dir "password" -}}
 # Halloy config.
 #
 # For a complete list of available options,
@@ -16,7 +16,7 @@ nickname = "jack"
 
 [servers.omglol.sasl.plain]
 username = "jack"
-password_file = "{{ $password }}"
+password_file = "{{ $password_file }}"
 
 [actions.buffer]
 click_channel_name = "replace-pane"
