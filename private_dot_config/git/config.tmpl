@@ -1,12 +1,9 @@
 {{ $dir := dir .chezmoi.targetFile -}}
-{{ $github := joinPath $dir "github.conf" -}}
-{{ $gitlab := joinPath $dir "gitlab.conf" -}}
+{{ $github_file := joinPath $dir "github.conf" -}}
+{{ $gitlab_file := joinPath $dir "gitlab.conf" -}}
 
 [init]
 	defaultBranch = main
-
-[include]
-	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}themes.gitconfig"
 
 [user]
 	email = "{{ .email }}"
@@ -59,8 +56,7 @@
 	required = true
 [core]
 	editor = nano
-	excludesfile = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.config{{ .chezmoi.pathSeparator }}git{{ .chezmoi.pathSeparator }}ignore"
-
+	excludesfile = {{joinPath .chezmoi.homeDir ".config" "git" "ignore" | quote}}
 [interactive]
 	diffFilter = delta --color-only
 
@@ -75,7 +71,7 @@
 	external = difft
 	colorMoved = default
 [gpg "ssh"]
-	allowedSignersFile = /Users/jack/.ssh/allowed_signers
+	allowedSignersFile = {{joinPath .chezmoi.homeDir ".ssh" "allowed_signers" | quote}}
 
 [fetch]
 	prune = true
@@ -88,17 +84,17 @@
 	followTags = true
 
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
-	path = "{{ $github }}"
+	path = "{{ $github_file }}"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-	path = "{{ $github }}"
+	path = "{{ $github_file }}"
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
-	path = "{{ $github }}"
+	path = "{{ $github_file }}"
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
-	path = "{{ $gitlab }}"
+	path = "{{ $gitlab_file }}"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-	path = "{{ $gitlab }}"
+	path = "{{ $gitlab_file }}"
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-	path = "{{ $gitlab }}"
+	path = "{{ $gitlab_file }}"
 
 [pager]
 	difftool = true
@@ -139,7 +135,7 @@
     name = mergiraf
     driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [gitget]
-    root = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}Developer"
+    root = {{joinPath .chezmoi.homeDir "Developer" | quote}}
 [credential "https://github.com"]
        helper =
        helper = !/opt/homebrew/bin/gh auth git-credential
