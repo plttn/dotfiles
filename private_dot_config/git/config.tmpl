@@ -84,17 +84,17 @@
 	followTags = true
 	
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d github.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d github.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d github.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d gitlab.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d gitlab.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir .gitconfig.d gitlab.conf}}"
+	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
 
 [pager]
 	difftool = true
