@@ -1,9 +1,13 @@
+{{ $dir := dir .chezmoi.targetFile -}}
+{{ $github := joinPath $dir "github.conf" -}}
+{{ $gitlab := joinPath $dir "gitlab.conf" -}}
+
 [init]
 	defaultBranch = main
 
 [include]
 	path = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitconfig.d{{ .chezmoi.pathSeparator }}themes.gitconfig"
-	
+
 [user]
 	email = "{{ .email }}"
 	name = "{{ .name }}"
@@ -82,19 +86,19 @@
 [push]
 	autoSetupRemote = true
 	followTags = true
-	
+
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
+	path = "{{ $github }}"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
+	path = "{{ $github }}"
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "github.conf"}}"
+	path = "{{ $github }}"
 [includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
+	path = "{{ $gitlab }}"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
+	path = "{{ $gitlab }}"
 [includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-	path = "{{ joinPath .chezmoi.homeDir ".gitconfig.d" "gitlab.conf"}}"
+	path = "{{ $gitlab }}"
 
 [pager]
 	difftool = true
