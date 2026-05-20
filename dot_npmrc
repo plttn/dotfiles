@@ -18,7 +18,7 @@ allow-git=none
 
 ## Don't install packages without asking (only
 ## applicable to old npx versions)
-install=false
+#install=false
 
 ## enable this if you don't really use npm and want to
 ## avoid consequences of some script calling npm or npx
