@@ -1,11 +1,12 @@
 [tools]
-node = "20"
+node = "22"
 go = "latest"
 usage = "latest"
 python = "latest"
-pnpm = "10"
+pnpm = "11"
 rust = "1.92.0"
 golangci-lint = "2.7.2"
+aube = "latest"
 
 [settings]
 experimental = true

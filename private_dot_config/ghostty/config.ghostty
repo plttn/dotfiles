@@ -28,4 +28,3 @@ macos-titlebar-style = transparent
 shell-integration-features = sudo,ssh-terminfo,ssh-env
 shell-integration = fish
 keybind = global:cmd+quote=toggle_quick_terminal
-
