@@ -1,3 +1,5 @@
+{{ $dir := dir .chezmoi.targetFile -}}
+{{ $password := joinPath $dir "password" -}}
 # Halloy config.
 #
 # For a complete list of available options,
@@ -14,7 +16,7 @@ nickname = "jack"
 
 [servers.omglol.sasl.plain]
 username = "jack"
-password_file = "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.config{{ .chezmoi.pathSeparator }}halloy{{ .chezmoi.pathSeparator }}password"
+password_file = "{{ $password }}"
 
 [actions.buffer]
 click_channel_name = "replace-pane"
@@ -37,9 +39,6 @@ auto_format = "markdown"
 # Type: string
 # Values: "solid", "unique"
 # Default: "unique"
-
-[buffer.channel.nicklist]
-away = { dimmed = 0.5 }
 
 [buffer.nickname]
 away = { dimmed = 0.5 }
