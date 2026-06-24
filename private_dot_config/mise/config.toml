@@ -6,8 +6,8 @@ python = "latest"
 pnpm = "11"
 rust = "1.92.0"
 golangci-lint = "2.7.2"
+"cargo:jj-gh" = "latest"
 aube = "latest"
-
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["rust"]

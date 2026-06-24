@@ -7,12 +7,14 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "ui_font_size": 16.0,
+    "buffer_font_weight": 400.0,
     "colorize_brackets": true,
     "completion_menu_item_kind": "symbol",
     "language_models": {
         "opencode": {
             "show_go_models": false,
-            "show_zen_models": false
+            "show_zen_models": false,
         },
         "lmstudio": {
             "api_url": "http://localhost:1234/api/v0",
@@ -101,24 +103,19 @@
                 "model": "gpt-5.2",
                 "enable_thinking": false,
             },
-            {
-                "provider": "zed.dev",
-                "model": "claude-sonnet-4-5",
-                "enable_thinking": true,
-            },
         ],
         "sidebar_side": "left",
         "dock": "left",
         "tool_permissions": {
             "default": "allow",
         },
-        "default_profile": "ask",
+        "default_profile": "write",
         "button": true,
         "enabled": true,
         "default_model": {
             "enable_thinking": false,
-            "provider": "opencode",
-            "model": "free/big-pickle",
+            "provider": "zed.dev",
+            "model": "claude-haiku-4-5",
         },
     },
     "base_keymap": "VSCode",
@@ -134,14 +131,31 @@
         "file_icons": true,
     },
     "languages": {
+        "Markdown": {
+            "show_edit_predictions": false,
+        },
         "Astro": {
-            // "language_servers": ["eslint"],
+            "formatter": "prettier",
         },
         "CSS": {
+            "formatter": "prettier",
             "language_servers": [
                 "tailwindcss-intellisense-css",
                 "!vscode-css-language-server",
             ],
+        },
+        "HTML": { "formatter": "prettier" },
+        "JSON": { "formatter": "prettier" },
+        "JSONC": {
+            "formatter": "prettier",
+        },
+        "JavaScript": {
+            "formatter": "prettier",
+        },
+
+        "TSX": { "formatter": "prettier" },
+        "TypeScript": {
+            "formatter": "prettier",
         },
     },
     "terminal": {
@@ -152,5 +166,9 @@
         "blinking": "on",
         "font_family": "Berkeley Mono",
         "font_size": 12.0,
+        "env": {
+            "EDITOR": "zed --wait",
+            "VISUAL": "zed --wait",
+        },
     },
 }
