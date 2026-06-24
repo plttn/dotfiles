@@ -11,5 +11,14 @@ aube = "latest"
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["rust"]
-
+[env]
+[tools]
+node = "22"
+go = "latest"
+usage = "latest"
+python = "latest"
+pnpm = "11"
+rust = "1.92.0"
+golangci-lint = "2.7.2"
+aube = "latest"
 [env]
