@@ -4,7 +4,7 @@
 ## @lavamoat/allow-scripts
 ignore-scripts=true
 # Avoid installing packages published in last 2 days
-min-release-age=3
+#min-release-age=3
 ## Don't install packages from git urls, which can
 ## be used to bypass the above two settings
 allow-git=none

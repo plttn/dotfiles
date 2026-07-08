@@ -24,6 +24,12 @@
         "enabled": true,
     },
     "agent_servers": {
+        "claude-acp": {
+            "default_config_options": {
+                "mode": "plan"
+            },
+            "type": "registry"
+        },
         "github-copilot-cli": {
             "type": "registry",
         },
