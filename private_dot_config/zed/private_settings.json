@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+    "markdown_preview_font_size": 14.0,
     "ui_font_size": 16.0,
     "buffer_font_weight": 400.0,
     "colorize_brackets": true,
@@ -53,7 +54,7 @@
     "ui_font_weight": 400.0,
     "ui_font_family": ".ZedSans",
     "edit_predictions": {
-        "allow_data_collection": "no",
+        "allow_data_collection": "yes",
         "disabled_globs": [],
         "mode": "eager",
         "copilot": {

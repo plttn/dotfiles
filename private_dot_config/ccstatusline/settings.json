@@ -103,6 +103,20 @@
       },
       {
         "id": "04de32fb-4002-434c-b2c4-9796b9ff5e0a",
+        "type": "separator",
+        "character": ","
+      },
+      {
+        "id": "b5410f84-956d-48d8-9359-eb3c90df5b65",
+        "type": "reset-timer",
+        "metadata": {
+          "display": "time",
+          "compact": "true"
+        },
+        "rawValue": true
+      },
+      {
+        "id": "402c210b-985f-4db0-ae03-a86a822aeacd",
         "type": "separator"
       },
       {
@@ -111,12 +125,26 @@
         "metadata": {
           "display": "progress-short"
         }
+      },
+      {
+        "id": "0fe47585-0c22-4535-ba33-3f9b5e290120",
+        "type": "separator",
+        "character": ","
+      },
+      {
+        "id": "06fbd2f5-d7b7-470f-9928-e2345b2a0a70",
+        "type": "weekly-reset-timer",
+        "metadata": {
+          "display": "time",
+          "compact": "true"
+        },
+        "rawValue": true
       }
     ]
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
-  "colorLevel": 2,
+  "colorLevel": 3,
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
