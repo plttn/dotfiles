@@ -8,7 +8,7 @@
         "color": "cyan"
       },
       {
-        "id": "009d8cf7-7ba3-4e40-9e9e-ed1684dfc3a2",
+        "id": "e8e1a328-7a0c-46ad-8787-0f6e1131568e",
         "type": "separator"
       },
       {
@@ -20,12 +20,26 @@
         }
       },
       {
-        "id": "2d4686d0-c690-4ff8-aead-64e41781133b",
+        "id": "b6a8cc34-f7e5-4c47-b75a-0917a8db044c",
         "type": "separator"
       },
       {
         "id": "2e5d5e57-df7f-48a4-a3f4-8c5ef54f6baf",
         "type": "thinking-effort"
+      },
+      {
+        "id": "b3fc6acb-6ad3-4702-84d2-41be7a293d9c",
+        "type": "separator"
+      },
+      {
+        "id": "b7500fe6-b060-49d1-afb7-41153d57b70a",
+        "type": "compaction-counter",
+        "metadata": {
+          "nerdFont": "true",
+          "showReclaimed": "true",
+          "hideZero": "false",
+          "showTriggers": "true"
+        }
       }
     ],
     [
@@ -37,22 +51,19 @@
         }
       },
       {
-        "id": "ff46d64f-4265-4261-b6b7-98f0cabdcdcc",
-        "type": "separator",
-        "character": " "
+        "id": "8511f4ca-ec6a-4a18-85e2-245176c13b91",
+        "type": "separator"
       },
       {
         "id": "5b58344f-c7e2-47f7-a0e6-ef643e5c798f",
         "type": "jj-revision",
-        "merge": "no-padding",
         "metadata": {
           "hideNoJj": "true"
         }
       },
       {
-        "id": "6b6846ac-8672-4c04-9cb3-911c1c3de3f5",
-        "type": "separator",
-        "character": "|"
+        "id": "4d5337e4-305b-4a0a-909d-7d5acb14dce9",
+        "type": "separator"
       },
       {
         "id": "1ecaa08a-0fa5-41b2-8a65-5ae26bcdd485",
@@ -60,6 +71,14 @@
         "metadata": {
           "hideNoJj": "true"
         }
+      },
+      {
+        "id": "3360e84e-c814-4efb-9ab4-06926b9bd764",
+        "type": "separator"
+      },
+      {
+        "id": "82d776e6-8c95-4491-b8ac-0b1c1eb02a6c",
+        "type": "jj-root-dir"
       }
     ],
     [
@@ -71,7 +90,7 @@
         }
       },
       {
-        "id": "8b2cd8bc-b8ba-4759-8cc1-85b732c43e0c",
+        "id": "0187f7ff-a2f5-430c-814b-b00e090221e5",
         "type": "separator"
       },
       {
@@ -82,7 +101,7 @@
         }
       },
       {
-        "id": "39b2ddf9-e704-4406-8458-b55d756f089a",
+        "id": "30d5578d-2811-4094-94f8-7fa4fd87de17",
         "type": "separator"
       },
       {
@@ -91,6 +110,14 @@
         "metadata": {
           "hideNoGit": "true"
         }
+      },
+      {
+        "id": "7d3904cc-a0c7-434c-8766-5a740791a0ae",
+        "type": "separator"
+      },
+      {
+        "id": "b87217a4-3545-4552-844a-896501f2a38d",
+        "type": "git-root-dir"
       }
     ],
     [
@@ -98,53 +125,55 @@
         "id": "4802ae83-ed0d-4083-b347-2a1b6c063c0f",
         "type": "reset-timer",
         "metadata": {
-          "display": "progress-short"
+          "display": "slider"
         }
       },
       {
-        "id": "04de32fb-4002-434c-b2c4-9796b9ff5e0a",
+        "id": "4c4e8bc8-654b-444b-8f6c-572651f6f613",
         "type": "separator",
         "character": ","
       },
       {
         "id": "b5410f84-956d-48d8-9359-eb3c90df5b65",
         "type": "reset-timer",
+        "rawValue": true,
         "metadata": {
           "display": "time",
-          "compact": "true"
-        },
-        "rawValue": true
+          "compact": "false"
+        }
       },
       {
-        "id": "402c210b-985f-4db0-ae03-a86a822aeacd",
+        "id": "7f9997ea-a54e-4c30-a19d-25bc793e3514",
         "type": "separator"
       },
       {
         "id": "be151bf2-b844-4320-80d0-9975fbf53ca6",
         "type": "weekly-usage",
         "metadata": {
-          "display": "progress-short"
+          "display": "slider",
+          "cursor": "true"
         }
       },
       {
-        "id": "0fe47585-0c22-4535-ba33-3f9b5e290120",
+        "id": "74cd5dbd-34f9-4dd6-a75f-5beb3d2ea6ab",
         "type": "separator",
         "character": ","
       },
       {
         "id": "06fbd2f5-d7b7-470f-9928-e2345b2a0a70",
         "type": "weekly-reset-timer",
+        "rawValue": true,
         "metadata": {
           "display": "time",
-          "compact": "true"
-        },
-        "rawValue": true
+          "compact": "false"
+        }
       }
     ]
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
   "colorLevel": 3,
+  "defaultPadding": "",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
