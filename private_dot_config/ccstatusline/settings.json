@@ -5,7 +5,8 @@
       {
         "id": "1",
         "type": "model",
-        "color": "cyan"
+        "color": "cyan",
+        "rawValue": true
       },
       {
         "id": "e8e1a328-7a0c-46ad-8787-0f6e1131568e",
@@ -17,7 +18,8 @@
         "metadata": {
           "inverse": "false",
           "display": "slider"
-        }
+        },
+        "rawValue": false
       },
       {
         "id": "b6a8cc34-f7e5-4c47-b75a-0917a8db044c",
@@ -25,7 +27,8 @@
       },
       {
         "id": "2e5d5e57-df7f-48a4-a3f4-8c5ef54f6baf",
-        "type": "thinking-effort"
+        "type": "thinking-effort",
+        "rawValue": true
       },
       {
         "id": "b3fc6acb-6ad3-4702-84d2-41be7a293d9c",
@@ -35,10 +38,10 @@
         "id": "b7500fe6-b060-49d1-afb7-41153d57b70a",
         "type": "compaction-counter",
         "metadata": {
-          "nerdFont": "true",
           "showReclaimed": "true",
           "hideZero": "false",
-          "showTriggers": "true"
+          "showTriggers": "true",
+          "nerdFont": "true"
         }
       }
     ],
@@ -78,7 +81,10 @@
       },
       {
         "id": "82d776e6-8c95-4491-b8ac-0b1c1eb02a6c",
-        "type": "jj-root-dir"
+        "type": "jj-root-dir",
+        "metadata": {
+          "hideNoJj": "true"
+        }
       }
     ],
     [
@@ -126,7 +132,8 @@
         "type": "reset-timer",
         "metadata": {
           "display": "slider"
-        }
+        },
+        "rawValue": true
       },
       {
         "id": "4c4e8bc8-654b-444b-8f6c-572651f6f613",
@@ -152,7 +159,8 @@
         "metadata": {
           "display": "slider",
           "cursor": "true"
-        }
+        },
+        "rawValue": true
       },
       {
         "id": "74cd5dbd-34f9-4dd6-a75f-5beb3d2ea6ab",
