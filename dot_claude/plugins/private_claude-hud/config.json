@@ -8,6 +8,11 @@
     "showAheadBehind": false,
     "showFileStats": false
   },
+  "jjStatus": {
+    "enabled": true,
+    "showDirty": true,
+    "showConflicts": true
+  },
   "display": {
     "showModel": true,
     "showContextBar": true,
@@ -33,7 +38,7 @@
     "showEffortLevel": false,
     "showOutputStyle": false,
     "showMemoryUsage": false,
-    "showPromptCache": false,
+    "showPromptCache": true,
     "showClaudeCodeVersion": false,
     "showCompactions": false,
     "showAdvisor": false,
