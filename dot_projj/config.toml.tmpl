@@ -1,0 +1,10 @@
+base = "{{ .chezmoi.destDir }}{{ .chezmoi.pathSeparator }}Developer"
+platform = "github.com"
+
+[tasks]
+
+[[hooks]]
+event = "post_{{ .chezmoi.command }}"
+tasks = ["zoxide"]
+
+[hooks.env]
