@@ -4,7 +4,7 @@ platform = "github.com"
 [tasks]
 
 [[hooks]]
-event = "post_{{ .chezmoi.command }}"
+event = "post_add"
 tasks = ["zoxide"]
 
 [hooks.env]
