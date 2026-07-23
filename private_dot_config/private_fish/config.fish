@@ -30,3 +30,4 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/jack/.lmstudio/bin
 # End of LM Studio CLI section
+projj shell-setup fish | source    # fish

@@ -1,14 +1,15 @@
 {{ $dir := dir .chezmoi.targetFile -}}
-{{ $password_file := joinPath $dir "password" -}}
+{{ $irc_social_lol_password_file := joinPath $dir "passwd_irc_social_lol" -}}
 # Halloy config.
 #
 # For a complete list of available options,
 # please visit https://halloy.squidowl.org/configuration/index.html
 
-theme = "Macaw Dark"
+theme = "Oxocarbon"
 
 [font]
 family = "Berkeley Mono"
+size = 12
 
 [servers.omglol]
 server = "irc.social.lol"
@@ -16,7 +17,7 @@ nickname = "jack"
 
 [servers.omglol.sasl.plain]
 username = "jack"
-password_file = "{{ $password_file }}"
+password_file = "{{ $irc_social_lol_password_file }}"
 
 [actions.buffer]
 click_channel_name = "replace-pane"
@@ -47,8 +48,7 @@ away = { dimmed = 0.5 }
 smart = 180
 [buffer.internal_messages.error]
 smart = 180
-[buffer.server_messages.topic]
-enabled = false
+
 
 [notifications]
 direct_message = { sound = "peck", show_toast = true }
