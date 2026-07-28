@@ -12,8 +12,8 @@ diff-editor = ":builtin"
 # fixes nerd icons in less pager
 pager = { command = ["less", "-FRX"], env = { LESSCHARSET = "utf-8", LESSUTFCHARDEF = "E000-F8FF:p,F0000-FFFFD:p,100000-10FFFD:p" } }
 {{ if eq .chezmoi.os "darwin" -}}
-merge-editor = "ksdiff"
-[merge-tools.ksdiff]
+[merge-tools.kaleidoscope]
+program = "ksdiff"
 diff-invocation-mode = "file-by-file"
 diff-args = ["--partial-changeset", "$left", "$right"]
 merge-args = ["--merge", "--output", "$output", "--base", "$base", "$left", "$right"]
