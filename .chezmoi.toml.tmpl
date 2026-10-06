@@ -8,7 +8,7 @@
 {{- $interactive := stdinIsATTY -}}
 {{- $name := promptStringOnce . "name" "Name" -}}
 {{- $email := promptStringOnce . "email" "Email" -}}
-{{- $signingKeyOpReference := promptStringOnce . "signingKeyOpReference" "public key op:// secret reference" | trimAll "\"" -}}
+{{- $is_work := promptBoolOnce . "is_work" "Is this a work machine" -}}
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your name and email with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -16,15 +16,20 @@
 {{- if eq .chezmoi.os "darwin" -}}
 {{- $computerName = output "scutil" "--get" "ComputerName" | trim -}}
 {{- end -}}
-{{- $signingKey := onepasswordRead $signingKeyOpReference -}}
 sourceDir = "{{ .chezmoi.sourceDir -}}"
+encryption = "age"
+
+[age]
+  identity = {{ joinPath .chezmoi.homeDir ".config/chezmoi/key.txt" | quote }}
+  recipient = "age17ngtqly39w3rgxne0f06f84ss8rq9qpk697vye9qqcywmutu9a2qum55v0"
+
 [data]
   name = {{ $name | quote}}
   email =  {{ $email | quote }}
   is_wsl = {{ $is_wsl }}
   computer_name = {{ $computerName | quote }}
   os = {{ .chezmoi.os | quote }}
-  signingkey = {{ $signingKey | quote }}
+  is_work = {{ $is_work }}
 
 [git]
   autoCommit = true

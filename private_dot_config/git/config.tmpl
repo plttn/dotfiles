@@ -6,9 +6,14 @@
 	defaultBranch = main
 
 [user]
-	email = "{{ .email }}"
 	name = "{{ .name }}"
-	signingkey = "{{ .signingkey }}"
+{{- if .is_work }}
+	email = "{{ .work_email }}"
+	signingkey = "key::{{ .keys.emu }}"
+{{- else }}
+	email = "{{ .email }}"
+	signingkey = "key::{{ .keys.personal }}"
+{{- end }}
 
 [alias]
 	# one-line log
@@ -87,9 +92,13 @@
 	path = "{{ $github_file }}"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
 	path = "{{ $github_file }}"
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
 	path = "{{ $github_file }}"
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
+{{- if .is_work }}
+[include]
+	path = "{{ joinPath $dir "work.conf" }}"
+{{- end }}
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
 	path = "{{ $gitlab_file }}"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
 	path = "{{ $gitlab_file }}"

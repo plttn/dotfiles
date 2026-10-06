@@ -2,7 +2,7 @@
 
 [user]
 name = "{{ .name }}"
-email = "{{ .email }}"
+email = "{{ if .is_work }}{{ .work_email }}{{ else }}{{ .email }}{{ end }}"
 
 [ui]
 default-command = "log"
@@ -23,7 +23,7 @@ merge-args = ["--merge", "--output", "$output", "--base", "$base", "$left", "$ri
 [signing]
 behavior = "drop"
 backend = "ssh"
-key = "{{ .signingkey }}"
+key = "{{ if .is_work }}{{ .keys.emu }}{{ else }}{{ .keys.personal }}{{ end }}"
 backends.ssh.allowed-signers = {{joinPath .chezmoi.homeDir ".ssh" "allowed_signers" | quote}}
 
 

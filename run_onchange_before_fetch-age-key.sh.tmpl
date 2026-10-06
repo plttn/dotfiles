@@ -1,0 +1,11 @@
+#!/bin/sh
+# Fetch the age key from 1Password once, so chezmoi can decrypt encrypted files.
+set -eu
+key={{ joinPath .chezmoi.homeDir ".config/chezmoi/key.txt" | quote }}
+[ -s "$key" ] && exit 0
+mkdir -p "$(dirname "$key")"
+umask 077
+tmp="$key.tmp"
+op read --account JF3PQH3C6FAA3D3KNN6BYSN3XU "op://osd4kgoldxrcodghtgcnptqsvy/slin24iodrktqhvdwo5dy3qzyy/notesPlain" > "$tmp"
+grep -q '^AGE-SECRET-KEY-' "$tmp" || { rm -f "$tmp"; echo "1Password item has no age secret key" >&2; exit 1; }
+mv "$tmp" "$key"

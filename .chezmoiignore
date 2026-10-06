@@ -2,3 +2,14 @@
 install.sh
 LICENSE
 README.md
+{{ if .is_work }}
+.config/halloy
+{{ else }}
+.config/git/github-work.conf
+.config/git/github-emu.conf
+.ssh/id_ed25519-emu.pub
+.ssh/config.d
+.config/git/work.conf
+.config/jj/conf.d
+.config/fish/conf.d/work.fish
+{{ end }}
