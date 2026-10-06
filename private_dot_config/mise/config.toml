@@ -7,9 +7,11 @@ pnpm = "11"
 rust = "1.92.0"
 golangci-lint = "2.7.2"
 "cargo:jj-gh" = "latest"
-"go:github.com/alyraffauf/tg/cmd/tg" = "latest"
+"pipx:rendercv" = { version = "latest", extras = "full" }
+"npm:vit" = "latest"
+zig = "0.15.2"
+
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["rust"]
-
-[env]
+auto_update = true

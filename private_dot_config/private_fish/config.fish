@@ -2,7 +2,6 @@
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    atuin init fish | source
     set -gx LS_COLORS (vivid generate molokai)
 
 end
@@ -31,3 +30,8 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 set -gx PATH $PATH /Users/jack/.lmstudio/bin
 # End of LM Studio CLI section
 projj shell-setup fish | source    # fish
+
+if status is-interactive
+    atuin init fish | source
+end
+
