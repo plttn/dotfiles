@@ -12,4 +12,5 @@ README.md
 .config/git/work.conf
 .config/jj/conf.d
 .config/fish/conf.d/work.fish
+.claude/work.md
 {{ end }}
