@@ -2,6 +2,8 @@
 install.sh
 LICENSE
 README.md
+Brewfile
+Brewfile.work
 {{ if .is_work }}
 .config/halloy
 {{ else }}

@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+# Install anything new in the Brewfiles. Sort drift back into them with brew-drift.
+# Brewfile hash: {{ include "Brewfile" | sha256sum }}
+{{- if .is_work }}
+# Brewfile.work hash: {{ include "Brewfile.work" | sha256sum }}
+{{- end }}
+set -eu
+cat {{ joinPath .chezmoi.sourceDir "Brewfile" | quote }}{{ if .is_work }} {{ joinPath .chezmoi.sourceDir "Brewfile.work" | quote }}{{ end }} | brew bundle install --no-upgrade --file=-
+{{ end -}}
