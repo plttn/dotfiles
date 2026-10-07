@@ -1,5 +1,3 @@
-work_email = "jack.platten@agilebits.com"
-
 [keys]
   personal = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHGminsJAXUJkc7TH7qHU6RNdZuMcWIwdx+zZCDpDiUG"
   work = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPdfrqOCDx1cjTn3ZFITw82y2ujZMFFaS9qowOeQEzpd"

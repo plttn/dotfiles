@@ -6,3 +6,9 @@ Include ~/.ssh/config.d/*
 
 Host unifi
     SetEnv TERM=xterm-256color
+
+Host *
+	AddKeysToAgent yes
+{{- if eq .chezmoi.os "darwin" }}
+	UseKeychain yes
+{{- end }}
