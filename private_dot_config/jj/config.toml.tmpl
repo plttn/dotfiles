@@ -17,6 +17,12 @@ program = "ksdiff"
 diff-invocation-mode = "file-by-file"
 diff-args = ["--partial-changeset", "$left", "$right"]
 merge-args = ["--merge", "--output", "$output", "--base", "$base", "$left", "$right"]
+[merge-tools.jayjay]
+program = "jayjay"
+diff-args = ["tool", "diff", "$left", "$right"]
+edit-args = ["tool", "edit", "$left", "$right"]
+merge-args = ["tool", "merge", "$left", "$base", "$right", "$output", "$path", "$marker_length"]
+merge-tool-edits-conflict-markers = true
 {{- end }}
 
 
