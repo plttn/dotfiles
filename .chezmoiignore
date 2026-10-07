@@ -13,4 +13,5 @@ README.md
 .config/jj/conf.d
 .config/fish/conf.d/work.fish
 .claude/work.md
+.config/1Password
 {{ end }}
