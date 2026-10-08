@@ -1,0 +1,18 @@
+tap "mike-engel/jwt-cli"
+tap "metalbear-co/mirrord"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx"
+# Kubernetes command-line interface
+brew "kubernetes-cli"
+# Template-free customization of Kubernetes YAML manifests
+brew "kustomize"
+# Connect your local process and your cloud environment
+brew "metalbear-co/mirrord/mirrord", trusted: true
+# Super fast CLI tool to decode and encode JWTs built in Rust
+brew "mike-engel/jwt-cli/jwt-cli", trusted: true
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Vulnerability scanner for container images and filesystems
+brew "grype"
+# Official Amazon AWS command-line interface
+brew "awscli"

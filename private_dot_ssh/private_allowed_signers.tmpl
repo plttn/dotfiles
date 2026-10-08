@@ -1,1 +1,5 @@
-{{- .email }} namespaces="git" {{ .signingkey }}
+{{ .email }} namespaces="git" {{ .keys.personal }}
+{{- if .is_work }}
+{{ .work_email }} namespaces="git" {{ .keys.work }}
+{{ .work_email }} namespaces="git" {{ .keys.emu }}
+{{- end }}

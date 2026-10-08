@@ -4,14 +4,18 @@ go = "latest"
 usage = "latest"
 python = "latest"
 pnpm = "11"
-rust = "1.92.0"
+rust = "latest"
 golangci-lint = "2.7.2"
 "cargo:jj-gh" = "latest"
+"cargo:cargo-binstall" = "latest"
+{{- if not .is_work }}
 "pipx:rendercv" = { version = "latest", extras = "full" }
 "npm:vit" = "latest"
 zig = "0.15.2"
+{{- end }}
 
 [settings]
 experimental = true
 idiomatic_version_file_enable_tools = ["rust"]
 auto_update = true
+go_set_goroot = false

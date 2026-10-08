@@ -6,9 +6,14 @@
 	defaultBranch = main
 
 [user]
-	email = "{{ .email }}"
 	name = "{{ .name }}"
-	signingkey = "{{ .signingkey }}"
+{{- if .is_work }}
+	email = "{{ .work_email }}"
+	signingkey = "key::{{ .keys.emu }}"
+{{- else }}
+	email = "{{ .email }}"
+	signingkey = "key::{{ .keys.personal }}"
+{{- end }}
 
 [alias]
 	# one-line log
@@ -37,7 +42,6 @@
 	# `git log` with patches shown with difftastic.
 	dl = -c diff.external=difft log -p --ext-diff
 	# Show the most recent commit with difftastic.
-	ds = -c diff.external=difft show --ext-diff
 	# `git diff` with difftastic.
 	dft = -c diff.external=difft diff
 
@@ -45,6 +49,27 @@
 	kcom = "!f() { GIT_EXTERNAL_DIFF=ksdiff git show HEAD --ext-diff; }; f";
 	klog = "!f() { GIT_EXTERNAL_DIFF=ksdiff git log -p --ext-diff; }; f";
 	dffk = "difftool -t kale";
+
+	# staging / committing
+	a   = add
+	ap  = add -p
+	c   = commit --verbose
+	ca  = commit -a --verbose
+	cm  = commit -m
+	cam = commit -a -m
+	m   = commit --amend --verbose
+
+	# diff / status
+	d  = diff
+	ds = diff --stat
+	dc = diff --cached
+	s  = status -s
+
+	# branches
+	co  = checkout
+	cob = checkout -b
+
+	last = log -1 HEAD --stat
 
 	# list aliases
 	la = "!git config -l | grep alias | cut -c 7-"
@@ -57,15 +82,12 @@
 [core]
 	editor = nano
 	excludesfile = {{joinPath .chezmoi.homeDir ".config" "git" "ignore" | quote}}
-[interactive]
-	diffFilter = delta --color-only
-
-[delta]
-	navigate = true
-	light = false
-
 [merge]
 	conflictstyle = diff3
+	tool = kale
+
+[mergetool]
+	prompt = false
 
 [diff]
 	external = difft
@@ -87,9 +109,13 @@
 	path = "{{ $github_file }}"
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
 	path = "{{ $github_file }}"
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com:*/**"]
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
 	path = "{{ $github_file }}"
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com:*/**"]
+{{- if .is_work }}
+[include]
+	path = "{{ joinPath $dir "work.conf" }}"
+{{- end }}
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
 	path = "{{ $gitlab_file }}"
 [includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
 	path = "{{ $gitlab_file }}"
@@ -112,6 +138,7 @@
 
 [difftool]
 	prompt = false
+	trustExitCode = true
 
 [pager]
     # Use a pager if the difftool output is larger than one screenful,

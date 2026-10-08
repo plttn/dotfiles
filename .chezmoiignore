@@ -2,3 +2,21 @@
 install.sh
 LICENSE
 README.md
+CLAUDE.md
+Brewfile
+Brewfile.work
+Brewfile.ignore
+{{ if .is_work }}
+.config/halloy
+{{ else }}
+.config/git/github-work.conf
+.config/git/github-emu.conf
+.ssh/id_ed25519-emu.pub
+.ssh/id_ed25519-personal.pub
+.ssh/config.d
+.config/git/work.conf
+.config/jj/conf.d
+.config/fish/conf.d/work.fish
+.claude/work.md
+.config/1Password
+{{ end }}

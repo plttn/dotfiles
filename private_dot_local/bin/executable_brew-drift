@@ -1,0 +1,175 @@
+#!/usr/bin/env fish
+# Sort Homebrew drift into the chezmoi Brewfiles.
+#
+# Installed but untracked: track as shared or work, ignore, uninstall, or skip.
+# Brewfile.ignore lists packages kept installed on purpose without tracking.
+# Tracked but not installed: install, remove from the Brewfile, or skip.
+
+set -x HOMEBREW_NO_AUTO_UPDATE 1
+set src (chezmoi source-path); or exit 1
+set shared $src/Brewfile
+set work $src/Brewfile.work
+set ignore $src/Brewfile.ignore
+set is_work (chezmoi execute-template '{{ .is_work }}')
+touch $shared $work $ignore
+
+# Print "type<TAB>name<TAB>entry line<TAB>description" for each tap/brew/cask.
+function entries
+    set -l desc ''
+    while read -l line
+        if string match -q '# *' -- $line
+            set desc (string sub -s 3 -- $line)
+        else if set -l m (string match -rg '^(tap|brew|cask) "([^"]+)"' -- $line)
+            printf '%s\t%s\t%s\t%s\n' $m[1] $m[2] $line $desc
+            set desc ''
+        end
+    end
+end
+
+function key
+    string split -f1,2 \t -- $argv[1] | string join \t
+end
+
+function in_file --argument-names k file
+    contains -- $k (cat $file | entries | while read -l e; key $e; end)
+end
+
+function forget_untracked --argument-names item
+    set -l i (contains -i -- $item $untracked); and set -e untracked[$i]
+end
+
+# Taps go first so their trust settings apply before anything that needs them.
+# Tracking a package from a third-party tap also tracks the tap in the same
+# file. Shared covers work machines, so a shared tap leaves Brewfile.work.
+function track --argument-names item file
+    set -l f (string split \t -- $item)
+    set -l k (key $item)
+    if test $f[1] = tap
+        if test $file = $shared; and in_file $k $work
+            untrack $item $work
+        else if test $file = $work; and in_file $k $shared
+            return
+        end
+    end
+    in_file $k $file; and return
+    set -l block
+    test -n "$f[4]"; and set block "# $f[4]"
+    set -a block $f[3]
+    if test $f[1] = tap
+        printf '%s\n' $block (cat $file) >$file.tmp; and mv $file.tmp $file
+    else
+        printf '%s\n' $block >>$file
+    end
+    set -l tap (string match -rg '^([^/]+/[^/]+)/' -- $f[2])
+    if test -n "$tap"; and not string match -q 'homebrew/*' -- $tap
+        set -l tap_item (for i in $installed; test (key $i) = "tap"\t"$tap"; and echo $i; end)
+        test -n "$tap_item"; or set tap_item "tap"\t"$tap"\t"tap \"$tap\""\t
+        track $tap_item $file
+        forget_untracked $tap_item
+    end
+end
+
+# Edit the text directly: brew bundle remove fails on formulae that no longer
+# exist, or leaves the description behind.
+function untrack --argument-names item
+    set -l k (key $item)
+    set -l targets $argv[2..]
+    test (count $targets) -gt 0; or set targets $shared $work
+    for file in $targets
+        set -l out
+        for line in (cat $file)
+            set -l m (string match -rg '^(tap|brew|cask) "([^"]+)"' -- $line)
+            if test (count $m) -eq 2; and test "$m[1]"\t"$m[2]" = "$k"
+                string match -q '# *' -- "$out[-1]"; and set -e out[-1]
+            else
+                set -a out $line
+            end
+        end
+        if set -q out[1]
+            printf '%s\n' $out >$file
+        else
+            : >$file
+        end
+    end
+end
+
+function pick --argument-names header
+    fzf --multi --reverse --delimiter \t --with-nth 1,2,4 --header $header \
+        --with-shell 'fish -c' \
+        --preview 'switch {1}; case tap; brew tap-info {2}; case brew; brew info --formula {2}; case cask; brew info --cask {2}; end' \
+        --preview-window right,60%,wrap
+end
+
+function choose --argument-names header
+    printf '%s\n' $argv[2..] | fzf --header $header --height 12 --reverse
+end
+
+function confirm --argument-names prompt
+    read -l -P "$prompt [y/N] " answer
+    string match -qi y -- $answer
+end
+
+echo "Reading installed packages and Brewfiles..."
+set installed (brew bundle dump --file=- --tap --formula --cask 2>/dev/null | entries)
+set files $shared
+test "$is_work" = true; and set -a files $work
+set tracked (cat $files | entries)
+
+set installed_keys (for i in $installed; key $i; end)
+set tracked_keys (for t in $tracked; key $t; end)
+set ignored_keys (cat $ignore | entries | while read -l e; key $e; end)
+set untracked (for i in $installed; contains -- (key $i) $tracked_keys $ignored_keys; or echo $i; end)
+set missing (for t in $tracked; contains -- (key $t) $installed_keys; or echo $t; end)
+
+set actions shared ignore skip uninstall
+test "$is_work" = true; and set actions shared work ignore skip uninstall
+
+while test (count $untracked) -gt 0
+    set picked (printf '%s\n' $untracked | pick (count $untracked)" installed but untracked. Tab selects, Enter confirms, Esc moves on."); or break
+    set action (choose "Track or remove "(count $picked)" item(s)?" $actions); or continue
+    if test $action = uninstall
+        printf '  %s\n' $picked | cut -f1,2
+        confirm "Uninstall these?"; or continue
+    end
+    for p in $picked
+        set f (string split \t -- $p)
+        switch $action
+            case shared
+                track $p $shared
+            case work
+                track $p $work
+            case ignore
+                echo $f[3] >>$ignore
+            case uninstall
+                switch $f[1]
+                    case tap
+                        brew untap $f[2]
+                    case cask
+                        brew uninstall --cask $f[2]
+                    case brew
+                        brew uninstall --formula $f[2]
+                end
+        end
+        forget_untracked $p
+    end
+end
+
+while test (count $missing) -gt 0
+    set picked (printf '%s\n' $missing | pick (count $missing)" in a Brewfile but not installed. Tab selects, Enter confirms, Esc moves on."); or break
+    set action (choose "What to do with "(count $picked)" item(s)?" install "remove from Brewfile" skip); or continue
+    for p in $picked
+        set f (string split \t -- $p)
+        switch $action
+            case install
+                echo $f[3] | brew bundle install --no-upgrade --file=-
+            case "remove from Brewfile"
+                untrack $p
+        end
+        set -l i (contains -i -- $p $missing); and set -e missing[$i]
+    end
+end
+
+echo
+git -C $src --no-pager diff --stat -- Brewfile Brewfile.work Brewfile.ignore
+git -C $src status --short -- Brewfile Brewfile.work Brewfile.ignore
+echo "Commit with: chezmoi git -- add Brewfile Brewfile.work Brewfile.ignore; and chezmoi git -- commit -m 'Update Brewfiles'"
