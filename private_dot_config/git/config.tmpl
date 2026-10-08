@@ -5,9 +5,6 @@
 [init]
 	defaultBranch = main
 
-[include]
-	path = {{ joinPath .chezmoi.homeDir ".local/share/delta/themes.gitconfig" | quote }}
-
 [user]
 	name = "{{ .name }}"
 {{- if .is_work }}
@@ -85,14 +82,6 @@
 [core]
 	editor = nano
 	excludesfile = {{joinPath .chezmoi.homeDir ".config" "git" "ignore" | quote}}
-[interactive]
-	diffFilter = delta --color-only
-
-[delta]
-	features = woolly-mammoth
-	navigate = true
-	light = false
-
 [merge]
 	conflictstyle = diff3
 	tool = kale
