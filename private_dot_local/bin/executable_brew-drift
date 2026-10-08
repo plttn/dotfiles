@@ -1,15 +1,17 @@
 #!/usr/bin/env fish
 # Sort Homebrew drift into the chezmoi Brewfiles.
 #
-# Installed but untracked: track as shared or work, uninstall, or skip.
+# Installed but untracked: track as shared or work, ignore, uninstall, or skip.
+# Brewfile.ignore lists packages kept installed on purpose without tracking.
 # Tracked but not installed: install, remove from the Brewfile, or skip.
 
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 set src (chezmoi source-path); or exit 1
 set shared $src/Brewfile
 set work $src/Brewfile.work
+set ignore $src/Brewfile.ignore
 set is_work (chezmoi execute-template '{{ .is_work }}')
-touch $shared $work
+touch $shared $work $ignore
 
 # Print "type<TAB>name<TAB>entry line<TAB>description" for each tap/brew/cask.
 function entries
@@ -115,11 +117,12 @@ set tracked (cat $files | entries)
 
 set installed_keys (for i in $installed; key $i; end)
 set tracked_keys (for t in $tracked; key $t; end)
-set untracked (for i in $installed; contains -- (key $i) $tracked_keys; or echo $i; end)
+set ignored_keys (cat $ignore | entries | while read -l e; key $e; end)
+set untracked (for i in $installed; contains -- (key $i) $tracked_keys $ignored_keys; or echo $i; end)
 set missing (for t in $tracked; contains -- (key $t) $installed_keys; or echo $t; end)
 
-set actions shared skip uninstall
-test "$is_work" = true; and set actions shared work skip uninstall
+set actions shared ignore skip uninstall
+test "$is_work" = true; and set actions shared work ignore skip uninstall
 
 while test (count $untracked) -gt 0
     set picked (printf '%s\n' $untracked | pick (count $untracked)" installed but untracked. Tab selects, Enter confirms, Esc moves on."); or break
@@ -135,6 +138,8 @@ while test (count $untracked) -gt 0
                 track $p $shared
             case work
                 track $p $work
+            case ignore
+                echo $f[3] >>$ignore
             case uninstall
                 switch $f[1]
                     case tap
@@ -165,6 +170,6 @@ while test (count $missing) -gt 0
 end
 
 echo
-git -C $src --no-pager diff --stat -- Brewfile Brewfile.work
-git -C $src status --short -- Brewfile Brewfile.work
-echo "Commit with: chezmoi git -- add Brewfile Brewfile.work; and chezmoi git -- commit -m 'Update Brewfiles'"
+git -C $src --no-pager diff --stat -- Brewfile Brewfile.work Brewfile.ignore
+git -C $src status --short -- Brewfile Brewfile.work Brewfile.ignore
+echo "Commit with: chezmoi git -- add Brewfile Brewfile.work Brewfile.ignore; and chezmoi git -- commit -m 'Update Brewfiles'"

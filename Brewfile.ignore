@@ -21,6 +21,6 @@ brew "syft"
 brew "curlie"
 brew "redis"
 brew "ldns"
-brew "lsd"
 brew "minikube"
 tap "hashicorp/tap"
+tap "zkondor/dist", trusted: true

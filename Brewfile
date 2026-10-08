@@ -1,3 +1,5 @@
+tap "1password/tap", trusted: true
+tap "oven-sh/bun"
 tap "hewigovens/tap", "https://github.com/hewigovens/tap.git"
 tap "popomore/tap"
 # Record and share terminal sessions
@@ -119,3 +121,13 @@ brew "gifsicle"
 brew "cowsay"
 # Implementation of the DNS protocols
 brew "bind"
+# Task is a task runner/build tool that aims to be simpler and easier to use
+brew "go-task"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Command-line shell and scripting language
+brew "powershell"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun", trusted: true

@@ -4,6 +4,7 @@ LICENSE
 README.md
 Brewfile
 Brewfile.work
+Brewfile.ignore
 {{ if .is_work }}
 .config/halloy
 {{ else }}
