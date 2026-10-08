@@ -1,4 +1,3 @@
-tap "1password/tap", trusted: true
 tap "oven-sh/bun"
 tap "hewigovens/tap", "https://github.com/hewigovens/tap.git"
 tap "popomore/tap"
