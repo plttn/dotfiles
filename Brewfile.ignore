@@ -13,6 +13,8 @@ cask "linearmouse"
 cask "osquery"
 cask "homebrew-app"
 cask "powershell"
+cask "1password-cli"
+cask "boop"
 brew "hashicorp/tap/terraform", trusted: true
 brew "saml2aws"
 brew "telnet"

@@ -91,16 +91,11 @@ brew "zellij"
 brew "zoxide"
 # Manage git repositories with directory conventions
 brew "popomore/tap/projj", trusted: true
-# Command-line interface for 1Password
-cask "1password-cli"
-# Scriptable scratchpad for developers
-cask "boop"
 # Browser for SQLite databases
 cask "db-browser-for-sqlite"
 cask "font-departure-mono"
 cask "font-geist"
 cask "font-geist-mono"
-cask "font-iosevka"
 cask "font-iosevka-aile"
 # GitHub command-line tool
 brew "gh"
