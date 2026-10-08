@@ -14,3 +14,5 @@ brew "mike-engel/jwt-cli/jwt-cli", trusted: true
 brew "k9s"
 # Vulnerability scanner for container images and filesystems
 brew "grype"
+# Official Amazon AWS command-line interface
+brew "awscli"

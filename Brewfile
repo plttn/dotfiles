@@ -1,3 +1,4 @@
+tap "hewigovens/tap", "https://github.com/hewigovens/tap.git"
 tap "popomore/tap"
 # Record and share terminal sessions
 brew "asciinema"
@@ -110,3 +111,11 @@ brew "magic-wormhole"
 brew "lazygit"
 # Disk Usage/Free Utility - a better 'df' alternative
 brew "duf"
+# Native GUI for Jujutsu version control
+cask "hewigovens/tap/jayjay"
+# GIF image/animation creator/editor
+brew "gifsicle"
+# Apjanke's fork of the classic cowsay project
+brew "cowsay"
+# Implementation of the DNS protocols
+brew "bind"
