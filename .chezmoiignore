@@ -11,6 +11,7 @@ Brewfile.ignore
 .config/git/github-work.conf
 .config/git/github-emu.conf
 .ssh/id_ed25519-emu.pub
+.ssh/id_ed25519-personal.pub
 .ssh/config.d
 .config/git/work.conf
 .config/jj/conf.d
