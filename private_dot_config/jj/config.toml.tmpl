@@ -49,8 +49,7 @@ bookmark-advance-to = 'closest_pushable(@)'
   heads(::to & mutable() & ~description(exact:"") & (~empty() | merges()))
 '''
 # unless you're really sure, you don't wanna force push
-'immutable_heads()' = 'builtin_immutable_heads() | (trunk().. & ~mine())'
-
+'immutable_heads()' = 'builtin_immutable_heads() | (trunk().. & ~mine()) | (remote_bookmarks() & @)'
 
 [aliases]
 pr = ["util", "exec", "--", "jj-gh", "pr"]
