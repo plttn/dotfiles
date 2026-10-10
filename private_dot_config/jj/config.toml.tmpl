@@ -27,14 +27,6 @@ merge-tool-edits-conflict-markers = true
 {{- end }}
 
 
-[merge-tools.jayjay]
-program = "jayjay"
-diff-args = ["tool", "diff", "$left", "$right"]
-edit-args = ["tool", "edit", "$left", "$right"]
-merge-args = ["tool", "merge", "$left", "$base", "$right", "$output", "$path", "$marker_length"]
-merge-tool-edits-conflict-markers = true
-
-
 [signing]
 behavior = "drop"
 backend = "ssh"
