@@ -12,6 +12,16 @@ end
 set --export EXA_COLORS "da=1;34"
 set --export BAT_THEME "Monokai Extended Origin"
 set --export GOPATH "$HOME/go"
+
+# Lix's fish hook sets fish_user_paths globally, which hides the universal
+# one and stops fish_add_path from persisting. Move its paths onto PATH
+# directly and drop the global.
+if set -qg fish_user_paths
+    set -l nix_paths $fish_user_paths
+    set -eg fish_user_paths
+    fish_add_path --path --prepend $nix_paths
+end
+
 set --export CLAUDE_CODE_PLUGIN_PREFER_HTTPS 1
 
 # The following lines were added by Docker Desktop to add commands to your PATH.
