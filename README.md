@@ -23,6 +23,9 @@ The first `chezmoi apply` fetches the age key from 1Password (one approval), so
 the 1Password CLI needs access to the personal account. After that the key
 lives at `~/.config/chezmoi/key.txt` and decryption needs no prompts.
 
+`chezmoi init` clones over HTTPS, where pushes go through `gh` and its work
+account and fail. Every `chezmoi apply` switches the remote to SSH.
+
 Re-run `chezmoi init` whenever `.chezmoi.toml.tmpl` changes; chezmoi warns when
 it does. `chezmoi init --data=false` asks every question again.
 
