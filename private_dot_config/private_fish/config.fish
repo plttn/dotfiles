@@ -41,6 +41,31 @@ scheme set monokai
 ~/.local/bin/mise activate fish | source
 direnv hook fish | source
 
+function __direnv_update_fish_complete_path
+    set -l desired
+    for p in $fish_complete_path
+        contains -- $p $__direnv_fish_complete_paths
+        or set -a desired $p
+    end
+
+    set -l added
+    for dir in (string split ':' -- $XDG_DATA_DIRS)
+        test -n "$dir"; or continue
+        # same normalisation as fish's share/config.fish, so contains matches its own entries
+        set -l completions_dir (string replace -r '([^/])/$' '$1' -- $dir)/fish/vendor_completions.d
+        if test -d "$completions_dir"; and not contains -- $completions_dir $desired
+            set -a desired $completions_dir
+            set -a added $completions_dir
+        end
+    end
+    set -g __direnv_fish_complete_paths $added
+
+    # every assignment makes fish unload autoloaded completions (complete_invalidate_path)
+    if test (count $desired) -ne (count $fish_complete_path); or test "$desired" != "$fish_complete_path"
+        set -g fish_complete_path $desired
+    end
+end
+
 set -g fish_transient_prompt 1
 fish_default_key_bindings
 
