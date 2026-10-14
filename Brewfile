@@ -125,3 +125,5 @@ brew "powershell"
 cask "ngrok"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun", trusted: true
+# Syntax-aware git merge driver
+brew "mergiraf"
