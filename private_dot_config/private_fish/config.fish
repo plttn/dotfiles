@@ -40,6 +40,30 @@ test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
 scheme set monokai
 ~/.local/bin/mise activate fish | source
 direnv hook fish | source
+
+function __direnv_update_fish_complete_path
+    # Same result as direnv's version, but only assign when it changes,
+    # so fish doesn't unload autoloaded completions on every prompt.
+    set -l base $fish_complete_path
+    for p in $__direnv_fish_complete_paths
+        set -l idx (contains -i -- $p $base); and set -e base[$idx]
+    end
+
+    set -l added
+    for dir in (string split ':' -- $XDG_DATA_DIRS)
+        set -l d "$dir/fish/vendor_completions.d"
+        if test -d "$d"; and not contains -- "$d" $base $added
+            set -a added $d
+        end
+    end
+
+    set -l new $base $added
+    if test (string join \n -- $new) != (string join \n -- $fish_complete_path)
+        set -g fish_complete_path $new
+    end
+    set -g __direnv_fish_complete_paths $added
+end
+
 set -g fish_transient_prompt 1
 fish_default_key_bindings
 
