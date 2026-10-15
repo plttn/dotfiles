@@ -41,6 +41,12 @@ scheme set monokai
 ~/.local/bin/mise activate fish | source
 direnv hook fish | source
 
+# Commands that currently have registered completions
+function __registered_completion_cmds
+    complete | string replace -rf -- '^complete(?: -[a-zA-Z]| --[a-z-]+)* (\'[^\']*\'|\S+).*' '$1' | string unescape | sort -u
+end
+
+# direnv 2.38.2's function, plus: re-source completions fish drops when the path changes.
 function __direnv_update_fish_complete_path
     set -l desired
     for p in $fish_complete_path
@@ -51,7 +57,6 @@ function __direnv_update_fish_complete_path
     set -l added
     for dir in (string split ':' -- $XDG_DATA_DIRS)
         test -n "$dir"; or continue
-        # same normalisation as fish's share/config.fish, so contains matches its own entries
         set -l completions_dir (string replace -r '([^/])/$' '$1' -- $dir)/fish/vendor_completions.d
         if test -d "$completions_dir"; and not contains -- $completions_dir $desired
             set -a desired $completions_dir
@@ -60,9 +65,19 @@ function __direnv_update_fish_complete_path
     end
     set -g __direnv_fish_complete_paths $added
 
-    # every assignment makes fish unload autoloaded completions (complete_invalidate_path)
     if test (count $desired) -ne (count $fish_complete_path); or test "$desired" != "$fish_complete_path"
+        set -l before (__registered_completion_cmds)
         set -g fish_complete_path $desired
+        set -l after (__registered_completion_cmds)
+        for cmd in $before
+            contains -- $cmd $after; and continue
+            set -l f (path filter -f -- $fish_complete_path/$cmd.fish)
+            if set -q f[1]
+                source $f[1]
+            else
+                status get-file completions/$cmd.fish 2>/dev/null | source   # bundled in the fish binary
+            end
+        end
     end
 end
 
