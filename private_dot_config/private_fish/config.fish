@@ -33,7 +33,7 @@ direnv hook fish | source
 set -g fish_transient_prompt 1
 fish_default_key_bindings
 
-set -g tide_jj_show_description false
+set -g tide_jj_show_description true
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
