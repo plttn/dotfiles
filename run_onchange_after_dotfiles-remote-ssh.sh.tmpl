@@ -1,0 +1,9 @@
+#!/bin/sh
+# Push the dotfiles over SSH. `chezmoi init` clones over HTTPS, where `gh`
+# supplies the token for its work account and pushes fail.
+set -eu
+src={{ .chezmoi.sourceDir | quote }}
+url="$(git -C "$src" remote get-url origin)"
+case "$url" in
+  https://github.com/plttn/dotfiles*) git -C "$src" remote set-url origin git@github.com:plttn/dotfiles.git ;;
+esac

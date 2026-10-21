@@ -12,6 +12,16 @@ end
 set --export EXA_COLORS "da=1;34"
 set --export BAT_THEME "Monokai Extended Origin"
 set --export GOPATH "$HOME/go"
+
+# Lix's fish hook sets fish_user_paths globally, which hides the universal
+# one and stops fish_add_path from persisting. Move its paths onto PATH
+# directly and drop the global.
+if set -qg fish_user_paths
+    set -l nix_paths $fish_user_paths
+    set -eg fish_user_paths
+    fish_add_path --path --prepend $nix_paths
+end
+
 set --export CLAUDE_CODE_PLUGIN_PREFER_HTTPS 1
 
 # The following lines were added by Docker Desktop to add commands to your PATH.
@@ -30,6 +40,47 @@ test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
 scheme set monokai
 ~/.local/bin/mise activate fish | source
 direnv hook fish | source
+
+# Commands that currently have registered completions
+function __registered_completion_cmds
+    complete | string replace -rf -- '^complete(?: -[a-zA-Z]| --[a-z-]+)* (\'[^\']*\'|\S+).*' '$1' | string unescape | sort -u
+end
+
+# direnv 2.38.2's function, plus: re-source completions fish drops when the path changes.
+function __direnv_update_fish_complete_path
+    set -l desired
+    for p in $fish_complete_path
+        contains -- $p $__direnv_fish_complete_paths
+        or set -a desired $p
+    end
+
+    set -l added
+    for dir in (string split ':' -- $XDG_DATA_DIRS)
+        test -n "$dir"; or continue
+        set -l completions_dir (string replace -r '([^/])/$' '$1' -- $dir)/fish/vendor_completions.d
+        if test -d "$completions_dir"; and not contains -- $completions_dir $desired
+            set -a desired $completions_dir
+            set -a added $completions_dir
+        end
+    end
+    set -g __direnv_fish_complete_paths $added
+
+    if test (count $desired) -ne (count $fish_complete_path); or test "$desired" != "$fish_complete_path"
+        set -l before (__registered_completion_cmds)
+        set -g fish_complete_path $desired
+        set -l after (__registered_completion_cmds)
+        for cmd in $before
+            contains -- $cmd $after; and continue
+            set -l f (path filter -f -- $fish_complete_path/$cmd.fish)
+            if set -q f[1]
+                source $f[1]
+            else
+                status get-file completions/$cmd.fish 2>/dev/null | source   # bundled in the fish binary
+            end
+        end
+    end
+end
+
 set -g fish_transient_prompt 1
 fish_default_key_bindings
 
