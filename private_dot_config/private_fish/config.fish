@@ -24,10 +24,6 @@ end
 
 set --export CLAUDE_CODE_PLUGIN_PREFER_HTTPS 1
 
-# The following lines were added by Docker Desktop to add commands to your PATH.
-set -gx PATH $PATH "$HOME/.docker/bin"
-# End of Docker Desktop section.
-
 # pnpm
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
