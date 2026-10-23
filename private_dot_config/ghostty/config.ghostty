@@ -28,5 +28,3 @@ macos-titlebar-style = transparent
 shell-integration-features = sudo,ssh-terminfo,ssh-env
 shell-integration = fish
 auto-update-channel = stable
-
-notify-on-command-finish = unfocused
