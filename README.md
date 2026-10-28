@@ -86,6 +86,9 @@ Three files in the repo root track packages. chezmoi doesn't deploy them.
   everything pending in the source directory. Commit other edits first.
 - chezmoi doesn't delete files that leave the repo. Remove them by hand, or
   list them in `.chezmoiremove`.
+- Fisher manages plugin functions. Track plugins in `fish_plugins`; don't add
+  their installed files from `~/.config/fish/functions` to chezmoi. Only personal
+  functions belong in the source directory.
 - `~/.claude/CLAUDE.md` holds the shared Claude Code instructions. On work
   machines it imports an encrypted `~/.claude/work.md`.
 
