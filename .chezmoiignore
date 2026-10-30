@@ -1,5 +1,7 @@
 .github/
 install.sh
+bootstrap-age-key.sh
+tests/
 LICENSE
 README.md
 AGENTS.md

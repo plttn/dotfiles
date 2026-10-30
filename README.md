@@ -7,10 +7,11 @@ both personal and work Macs; a per-machine flag decides what each one gets.
 
 ```sh
 chezmoi init plttn/dotfiles   # prompts below
+sh "$(chezmoi source-path)/bootstrap-age-key.sh"
 chezmoi diff                  # review before writing anything
 chezmoi apply
 fisher update                 # fish plugins from fish_plugins
-mise install                  # tools from mise/config.toml
+~/.local/bin/mise install      # tools from mise/config.toml
 ```
 
 `chezmoi init` asks for:
@@ -19,9 +20,15 @@ mise install                  # tools from mise/config.toml
 - **Is this a work machine**: sets `is_work`.
 - **Work email**: only asked on work machines.
 
-The first `chezmoi apply` fetches the age key from 1Password (one approval), so
-the 1Password CLI needs access to the personal account. After that the key
-lives at `~/.config/chezmoi/key.txt` and decryption needs no prompts.
+Before fetching the age key, install the 1Password CLI and give it access to
+the personal account. The bootstrap command fetches the key (one approval)
+before the first diff. The key lives at `~/.config/chezmoi/key.txt`; later runs
+skip the fetch while the file is nonempty. Use the same command to restore a
+missing key. Apply also checks for it, but diff needs the key beforehand.
+
+Apply installs mise with its standalone installer from `https://mise.run` if
+`~/.local/bin/mise` is missing. It leaves an existing executable alone.
+Installing mise's configured tools remains a separate `mise install` step.
 
 `chezmoi init` clones over HTTPS, where pushes go through `gh` and its work
 account and fail. Every `chezmoi apply` switches the remote to SSH.
@@ -82,8 +89,12 @@ Three files in the repo root track packages. chezmoi doesn't deploy them.
 
 ## Notes
 
-- `git.autoCommit` is on, so `chezmoi add` and `chezmoi forget` commit
-  everything pending in the source directory. Commit other edits first.
+- Review and commit source changes manually; chezmoi auto-commit is disabled.
+  On existing machines, run `chezmoi init` to pick up this change before using
+  commands such as `chezmoi add` or `chezmoi forget`.
+- Fish loads mise completions from the installed binary when needed. Apply
+  replaces the old downloaded completion file with a managed loader. Review
+  any local edits before accepting that replacement.
 - chezmoi doesn't delete files that leave the repo. Remove them by hand, or
   list them in `.chezmoiremove`.
 - Fisher manages plugin functions. Track plugins in `fish_plugins`; don't add
@@ -91,6 +102,12 @@ Three files in the repo root track packages. chezmoi doesn't deploy them.
   functions belong in the source directory.
 - `~/.claude/CLAUDE.md` holds the shared Claude Code instructions. On work
   machines it imports an encrypted `~/.claude/work.md`.
+
+## Checks
+
+Run `sh tests/check.sh` with chezmoi, Python 3, Fish, and ShellCheck installed.
+The checks render both machine types and test setup scripts in scratch homes.
+They make no network requests or live 1Password calls and install no real tools.
 
 ## License
 

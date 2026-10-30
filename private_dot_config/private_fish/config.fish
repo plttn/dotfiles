@@ -34,7 +34,9 @@ end
 test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
 
 scheme set monokai
-~/.local/bin/mise activate fish | source
+if test -x ~/.local/bin/mise
+    ~/.local/bin/mise activate fish | source
+end
 direnv hook fish | source
 
 # Commands that currently have registered completions

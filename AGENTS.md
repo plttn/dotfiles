@@ -31,9 +31,8 @@ layout. These rules cover what isn't obvious from the files.
 
 ## chezmoi gotchas
 
-- `git.autoCommit = true`: `chezmoi add`, `forget` and similar commands commit
-  everything pending in the source directory. Commit or ask about pending work
-  first.
+- Review and commit source changes manually; chezmoi auto-commit is disabled.
+  Existing machines need `chezmoi init` to pick up this config change.
 - chezmoi prompts before overwriting a file that changed since its last write.
   The prompt needs a TTY and fails here. Diff the file, keep anything the user
   added (copy it into the source first), and only then use `--force`.
@@ -49,6 +48,8 @@ layout. These rules cover what isn't obvious from the files.
 
 ## Testing changes
 
+- Run `sh tests/check.sh`. It needs chezmoi, Python 3, Fish, and ShellCheck.
+  It uses scratch homes and stubs, with no network or live 1Password calls.
 - Render templates for both machine types with scratch configs instead of the
   real one: write a config with `is_work = true` and one with `false`, then
   `chezmoi --config <scratch> execute-template < file.tmpl` or
@@ -63,7 +64,9 @@ layout. These rules cover what isn't obvious from the files.
 - Each `op` call costs the user a biometric approval. Never run `op` to
   explore. Templates that call `onepasswordRead` cost one approval per
   `chezmoi diff`/`status`/`apply` on machines that render them.
-- The age key fetch script runs `op read` only when the key file is missing.
+- Run `sh "$(chezmoi source-path)/bootstrap-age-key.sh"` before the first
+  `chezmoi diff`. Apply also checks for the key on each run. The helper calls
+  `op read` only when the key file is missing or empty.
 
 ## Homebrew
 
