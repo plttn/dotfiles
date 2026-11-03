@@ -36,8 +36,8 @@ layout. These rules cover what isn't obvious from the files.
 - chezmoi prompts before overwriting a file that changed since its last write.
   The prompt needs a TTY and fails here. Diff the file, keep anything the user
   added (copy it into the source first), and only then use `--force`.
-- Files in the repo root (README.md, AGENTS.md, the Brewfiles) must stay in
-  `.chezmoiignore`, or chezmoi deploys them to `~`.
+- Files in the repo root (README.md, AGENTS.md, CLAUDE.md, the Brewfiles)
+  must stay in `.chezmoiignore`, or chezmoi deploys them to `~`.
 - Work-only targets belong in the `else` branch of `.chezmoiignore`.
 - `chezmoi edit` opens an interactive editor and won't work here. For
   encrypted files: `chezmoi decrypt < file.age > tmp`, edit, then
@@ -63,9 +63,11 @@ layout. These rules cover what isn't obvious from the files.
 
 - Each `op` call costs the user a biometric approval. Never run `op` to
   explore. Templates that call `onepasswordRead` cost one approval per
-  `chezmoi diff`/`status`/`apply` on machines that render them.
+  `chezmoi diff`/`status`/`apply` on machines that render them. Give such
+  templates a `create_` prefix when the file only needs writing once: chezmoi
+  then skips rendering while the target exists.
 - Run `sh "$(chezmoi source-path)/bootstrap-age-key.sh"` before the first
-  `chezmoi diff`. Apply also checks for the key on each run. The helper calls
+  `chezmoi diff`. Apply runs it again when the helper changes. The helper calls
   `op read` only when the key file is missing or empty.
 
 ## Homebrew
