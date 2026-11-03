@@ -3,7 +3,12 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set -gx LS_COLORS (vivid generate molokai)
-
+    projj shell-setup fish | source    # fish
+    atuin init fish | source
+    scheme set monokai
+    if test -x ~/.local/bin/mise
+        ~/.local/bin/mise activate fish | source
+    end
 end
 
 # eval "$(atuin hex init)"
@@ -33,10 +38,7 @@ end
 
 test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
 
-scheme set monokai
-if test -x ~/.local/bin/mise
-    ~/.local/bin/mise activate fish | source
-end
+
 direnv hook fish | source
 
 # Commands that currently have registered completions
@@ -91,8 +93,6 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH "$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
-projj shell-setup fish | source    # fish
 
 if status is-interactive
-    atuin init fish | source
 end
