@@ -1,8 +1,29 @@
 function __basecamp_append --description 'Append a bullet to a section of today\'s Basecamp daily note'
     set -l section $argv[1]
-    set -l text (string join ' ' -- $argv[2..-1])
+    set -l cmd (string lower -- $section | string replace log did | string replace captured thought)
+
+    if contains -- "$argv[2]" -h --help
+        echo "usage: $cmd <text>"
+        echo
+        echo "Append a bullet to the ## $section section of today's Basecamp daily note,"
+        echo "creating the note from the template if it doesn't exist yet."
+        echo
+        echo "  did      something that happened         → ## Log"
+        echo "  thought  something that occurred to you → ## Captured"
+        echo
+        echo "Quote text containing [[links]], apostrophes, or other special characters:"
+        echo "  $cmd \"worked on [[Some Note]]\""
+        echo
+        echo "Vault: \$BASECAMP_VAULT, or ~/Obsidian/Basecamp if unset."
+        return 0
+    end
+
+    # Allow `did -- -text` for text that starts with a dash
+    set -l words $argv[2..-1]
+    test "$words[1]" = --; and set -e words[1]
+    set -l text (string join ' ' -- $words)
     if test -z "$text"
-        echo "usage: did|thought <text>" >&2
+        echo "usage: $cmd <text>  (see $cmd --help)" >&2
         return 1
     end
 
