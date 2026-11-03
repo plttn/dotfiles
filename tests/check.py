@@ -183,7 +183,11 @@ echo 'complete -c mise -f -a dotfiles_test_completion'
         self.run_command(TOOLS["shellcheck"], *shell_files)
         for script in shell_files:
             self.run_command("/bin/sh", "-n", script)
-        for script in (ROOT / "private_dot_config/private_fish/config.fish", COMPLETION):
+        for script in (
+            ROOT / "private_dot_config/private_fish/config.fish",
+            COMPLETION,
+            *sorted((ROOT / "private_dot_config/private_fish/functions").glob("*.fish")),
+        ):
             self.run_command(TOOLS["fish"], "--no-config", "--no-execute", script)
 
 
