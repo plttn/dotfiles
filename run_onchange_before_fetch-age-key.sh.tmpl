@@ -1,0 +1,4 @@
+#!/bin/sh
+# Re-run when bootstrap-age-key.sh changes: {{ include "bootstrap-age-key.sh" | sha256sum }}
+set -eu
+sh {{ joinPath .chezmoi.sourceDir "bootstrap-age-key.sh" | quote }}

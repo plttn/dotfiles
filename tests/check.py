@@ -141,20 +141,20 @@ cp "$INSTALLER_PAYLOAD" "$4"
 
     def test_mise_install_and_existing_binary(self):
         self.installer('mkdir -p "$HOME/.local/bin"\nprintf "#!/bin/sh\\n" > "$HOME/.local/bin/mise"\nchmod 755 "$HOME/.local/bin/mise"\n')
-        self.script("run_before_install-mise.sh")
+        self.script("run_onchange_before_install-mise.sh")
         self.assertTrue(os.access(self.home / ".local/bin/mise", os.X_OK))
-        self.script("run_before_install-mise.sh")
+        self.script("run_onchange_before_install-mise.sh")
         self.assertEqual((self.base / "calls").read_text(), "curl\n")
         self.assertEqual(list(self.tmp.iterdir()), [])
 
     def test_mise_failures(self):
         self.stub("curl", 'echo partial > "$4"\nexit 1\n')
-        self.script("run_before_install-mise.sh", succeeds=False)
+        self.script("run_onchange_before_install-mise.sh", succeeds=False)
         self.assertEqual(list(self.tmp.iterdir()), [])
         for body in ("exit 1\n", "exit 0\n"):
             with self.subTest(installer=body):
                 self.installer(body)
-                self.script("run_before_install-mise.sh", succeeds=False)
+                self.script("run_onchange_before_install-mise.sh", succeeds=False)
                 self.assertFalse((self.home / ".local/bin/mise").exists())
                 self.assertEqual(list(self.tmp.iterdir()), [])
 
@@ -179,7 +179,7 @@ echo 'complete -c mise -f -a dotfiles_test_completion'
         self.assertEqual((self.base / "calls").read_text(), "completion fish\n")
 
     def test_syntax(self):
-        shell_files = [ROOT / "bootstrap-age-key.sh", ROOT / "run_before_install-mise.sh", ROOT / "tests/check.sh"]
+        shell_files = [ROOT / "bootstrap-age-key.sh", ROOT / "run_onchange_before_install-mise.sh", ROOT / "tests/check.sh"]
         self.run_command(TOOLS["shellcheck"], *shell_files)
         for script in shell_files:
             self.run_command("/bin/sh", "-n", script)
