@@ -3,11 +3,14 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set -gx LS_COLORS (vivid generate molokai)
-    projj shell-setup fish | source    # fish
+    projj shell-setup fish | source # fish
     atuin init fish | source
     scheme set monokai
     if test -x ~/.local/bin/mise
         ~/.local/bin/mise activate fish | source
+    end
+    if set -q GHOSTTY_RESOURCES_DIR
+        source "$GHOSTTY_RESOURCES_DIR"/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
     end
 end
 
@@ -37,7 +40,6 @@ end
 # pnpm end
 
 test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
-
 
 direnv hook fish | source
 
@@ -75,7 +77,7 @@ function __direnv_update_fish_complete_path
             if set -q f[1]
                 source $f[1]
             else
-                status get-file completions/$cmd.fish 2>/dev/null | source   # bundled in the fish binary
+                status get-file completions/$cmd.fish 2>/dev/null | source # bundled in the fish binary
             end
         end
     end
