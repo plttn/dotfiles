@@ -302,7 +302,7 @@ model = "fast"
 capture = true
 
 [pty_proxy]
-enabled = true
+enabled = false
 
 [output]
-enabled = true
+enabled = false
