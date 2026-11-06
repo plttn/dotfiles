@@ -5,12 +5,11 @@ if status is-interactive
     set -gx LS_COLORS (vivid generate molokai)
     projj shell-setup fish | source # fish
     atuin init fish | source
+    zoxide init fish | source
+
     scheme set monokai
     if test -x ~/.local/bin/mise
         ~/.local/bin/mise activate fish | source
-    end
-    if set -q GHOSTTY_RESOURCES_DIR
-        source "$GHOSTTY_RESOURCES_DIR"/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish
     end
 end
 
