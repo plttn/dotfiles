@@ -35,11 +35,12 @@ backends.ssh.allowed-signers = {{joinPath .chezmoi.homeDir ".ssh" "allowed_signe
 
 
 [git]
-sign-on-push = true
 write-change-id-header = true
 
 [revsets]
 bookmark-advance-to = 'closest_pushable(@)'
+git-sign-on-push = "~signed() & mine()"
+
 
 [revset-aliases]
 # Closest revision that is mutable, described and either non-empty or a merge
