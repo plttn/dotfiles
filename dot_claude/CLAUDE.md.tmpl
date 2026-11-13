@@ -1,3 +1,7 @@
+## Writing Expectations
+
+- Use American English, rather than British English. `recognize`/recognise`, etc.
+
 ## Tooling
 
 - Difftastic is set as `diff.external` **intentionally** — don't suggest unsetting it. It only affects **patch text**, so pass `--no-ext-diff` (with `--no-pager`) on `git diff` / `show` / `log -p` whenever the patch will be parsed, grepped, or compared. Without it, output is side-by-side and `grep -E '^[+-]'` matches nothing — silently reading as "no differences" when files do differ.
