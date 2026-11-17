@@ -1,0 +1,5 @@
+ignore-scripts=true
+allow-git=none
+{{ if .is_work -}}
+{{ include ".npmrc-work.age" | decrypt -}}
+{{ end -}}
