@@ -7,7 +7,7 @@ email = "{{ if .is_work }}{{ .work_email }}{{ else }}{{ .email }}{{ end }}"
 [ui]
 default-command = "log"
 diff-formatter = ["difft", "--color=always", "--width=$width", "$left", "$right"]
-show-cryptographic-signatures = true
+show-cryptographic-signatures = false
 diff-editor = ":builtin"
 editor = "nano"
 # fixes nerd icons in less pager
@@ -52,6 +52,14 @@ git-sign-on-push = "~signed() & mine()"
 
 [aliases]
 pr = ["util", "exec", "--", "jj-gh", "pr"]
+logsig = ["log", "--config", "ui.show-cryptographic-signatures=true"]
 
 [jj-hooks]
 advance-bookmarks = true
+
+# Verifying signatures costs ~15ms per commit, so only `show` gets them by
+# default. Use `jj logsig` for a log with signatures.
+[[--scope]]
+--when.commands = ["show"]
+[--scope.ui]
+show-cryptographic-signatures = true
