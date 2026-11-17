@@ -48,6 +48,7 @@ function __registered_completion_cmds
 end
 
 # direnv 2.38.2's function, plus: re-source completions fish drops when the path changes.
+# leave until fish 4.10 https://github.com/fish-shell/fish-shell/issues/13049
 function __direnv_update_fish_complete_path
     set -l desired
     for p in $fish_complete_path
