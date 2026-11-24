@@ -38,13 +38,13 @@ while read -r local_ref local_sha remote_ref remote_sha; do
 
     # betterleaks must not read the ref list that git sends on stdin.
     betterleaks git --config "$config" --log-opts "$range" \
-        --redact --verbose --no-banner --no-color . </dev/null ||
+        --log-level warn --redact --verbose --no-banner --no-color . </dev/null ||
         status=1
     # betterleaks scans patches, not commit messages.
     # shellcheck disable=SC2086
     git log --format=%B $range |
         betterleaks stdin --config "$config" \
-            --redact --verbose --no-banner --no-color ||
+            --log-level warn --redact --verbose --no-banner --no-color ||
         status=1
 done
 
