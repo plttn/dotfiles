@@ -1,4 +1,10 @@
-base = "{{ .chezmoi.destDir }}{{ .chezmoi.pathSeparator }}Developer"
+base = ["{{ .chezmoi.destDir }}{{ .chezmoi.pathSeparator }}Developer", "{{ .chezmoi.destDir }}{{ .chezmoi.pathSeparator }}go{{ .chezmoi.pathSeparator }}src"]
+
+
+[[routes]]
+match = '^(go\.|golang\.org/|gopkg\.in/|k8s\.io/|go\.googlesource\.com/)'
+base = "{{ .chezmoi.destDir }}{{ .chezmoi.pathSeparator }}go{{ .chezmoi.pathSeparator }}src"
+
 platform = "github.com"
 
 [tasks]
