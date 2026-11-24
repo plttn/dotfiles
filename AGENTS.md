@@ -31,8 +31,10 @@ layout. These rules cover what isn't obvious from the files.
 
 ## chezmoi gotchas
 
-- Review and commit source changes manually; chezmoi auto-commit is disabled.
-  Existing machines need `chezmoi init` to pick up this config change.
+- chezmoi auto-commit is enabled: `chezmoi add`, `re-add`, `forget`, etc.
+  commit immediately, with the target path as the message. Check the path is
+  safe for a public repo before running them. Direct edits to the source
+  directory still need a manual commit.
 - chezmoi prompts before overwriting a file that changed since its last write.
   The prompt needs a TTY and fails here. Diff the file, keep anything the user
   added (copy it into the source first), and only then use `--force`.

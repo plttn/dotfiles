@@ -89,8 +89,8 @@ class SetupChecks(unittest.TestCase):
                     TOOLS["chezmoi"], "--config", generated, "--no-tty",
                     "dump-config", "--format", "json",
                 )
-                self.assertIn("autoCommit = false", rendered)
-                self.assertFalse(json.loads(auto_commit.stdout)["git"].get("autoCommit", False))
+                self.assertIn("autoCommit = true", rendered)
+                self.assertTrue(json.loads(auto_commit.stdout)["git"]["autocommit"])
                 targets = set(self.chezmoi(work, "managed").splitlines())
                 for excluded in ("bootstrap-age-key.sh", "tests", "README.md", "AGENTS.md"):
                     self.assertFalse(any(t == excluded or t.startswith(excluded + "/") for t in targets))

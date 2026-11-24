@@ -89,9 +89,9 @@ Three files in the repo root track packages. chezmoi doesn't deploy them.
 
 ## Notes
 
-- Review and commit source changes manually; chezmoi auto-commit is disabled.
-  On existing machines, run `chezmoi init` to pick up this change before using
-  commands such as `chezmoi add` or `chezmoi forget`.
+- chezmoi auto-commit is enabled: `chezmoi add`, `re-add`, `forget`, and
+  similar commands commit source changes automatically. Edits made directly in
+  the source directory still need a manual commit.
 - Fish loads mise completions from the installed binary when needed. Apply
   replaces the old downloaded completion file with a managed loader. Review
   any local edits before accepting that replacement.
