@@ -8,12 +8,14 @@ layout. These rules cover what isn't obvious from the files.
 - Internal names (work hosts, org names, vault and item names, work emails,
   internal tool names) only go in encrypted files. That includes comments and
   commit messages.
-- Before any push, search unencrypted tracked files and the unpushed history:
-
-  ```sh
-  git ls-files | grep -v '\.age$' | xargs grep -niE '<internal terms>'
-  git --no-pager log -p --no-ext-diff origin/main..HEAD -- . ':(exclude)*.age'
-  ```
+- `.githooks/pre-push` runs betterleaks on the commits being pushed (patches
+  and messages) and blocks secrets and internal names. Its rules live in the
+  encrypted `private_dot_config/private_betterleaks/encrypted_private_dotfiles.toml.age`,
+  deployed to `~/.config/betterleaks/dotfiles.toml`. Add new internal terms
+  there, never to a plain-text file. Don't bypass it with `--no-verify`
+  unless the user confirms a finding is a false positive.
+- The hook only sees what's pushed. Before committing, still check new
+  unencrypted files by eye.
 
 - Public keys are fine to commit. Private keys never are.
 

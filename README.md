@@ -92,6 +92,9 @@ Three files in the repo root track packages. chezmoi doesn't deploy them.
 - chezmoi auto-commit is enabled: `chezmoi add`, `re-add`, `forget`, and
   similar commands commit source changes automatically. Edits made directly in
   the source directory still need a manual commit.
+- A pre-push hook (`.githooks/pre-push`) scans outgoing commits with
+  betterleaks for secrets and internal names. `chezmoi apply` enables it and
+  deploys its encrypted rules to `~/.config/betterleaks/dotfiles.toml`.
 - Fish loads mise completions from the installed binary when needed. Apply
   replaces the old downloaded completion file with a managed loader. Review
   any local edits before accepting that replacement.

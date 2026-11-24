@@ -11,8 +11,9 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parent.parent
-TOOLS = {name: shutil.which(name) for name in ("chezmoi", "fish", "shellcheck")}
+TOOLS = {name: shutil.which(name) for name in ("chezmoi", "fish", "shellcheck", "betterleaks", "git")}
 COMPLETION = ROOT / "private_dot_config/private_fish/completions/mise.fish"
+PRE_PUSH = ROOT / ".githooks/pre-push"
 
 
 class SetupChecks(unittest.TestCase):
@@ -178,8 +179,73 @@ echo 'complete -c mise -f -a dotfiles_test_completion'
         self.assertIn("dotfiles_test_completion", result.stdout)
         self.assertEqual((self.base / "calls").read_text(), "completion fish\n")
 
+    def git(self, repo, *args):
+        return self.run_command(TOOLS["git"], "-C", repo, *args).stdout.strip()
+
+    def commit(self, repo, path, text, message="Update file"):
+        (repo / path).write_text(text)
+        self.git(repo, "add", path)
+        self.git(repo, "commit", "--quiet", "--message", message)
+        return self.git(repo, "rev-parse", "HEAD")
+
+    def push_check(self, repo, local, remote, succeeds):
+        result = subprocess.run(
+            ["/bin/sh", PRE_PUSH, "origin", "git@example.invalid:x.git"],
+            input=f"refs/heads/main {local} refs/heads/main {remote}\n",
+            text=True, capture_output=True, env=self.env, cwd=repo,
+        )
+        self.assertEqual(result.returncode == 0, succeeds, result.stdout + result.stderr)
+
+    def test_pre_push_hook(self):
+        for tool in ("betterleaks", "git"):
+            (self.bin / tool).symlink_to(TOOLS[tool])
+        self.env.update(
+            GIT_AUTHOR_NAME="Test", GIT_AUTHOR_EMAIL="test@example.invalid",
+            GIT_COMMITTER_NAME="Test", GIT_COMMITTER_EMAIL="test@example.invalid",
+            GIT_CONFIG_NOSYSTEM="1",
+        )
+        config = self.home / ".config/betterleaks/dotfiles.toml"
+        config.parent.mkdir(parents=True)
+        config.write_text(r"""
+[extend]
+useDefault = true
+
+[[rules]]
+id = "internal-name"
+regex = '''(?i)\bfakecorp\b'''
+keywords = ["fakecorp"]
+
+[[allowlists]]
+paths = ['''\.age$''']
+""")
+        repo = self.base / "repo"
+        self.run_command(TOOLS["git"], "init", "--quiet", "--initial-branch=main", repo)
+        pushed = self.commit(repo, "a.txt", "fakecorp was here before the hook\n")
+        self.git(repo, "update-ref", "refs/remotes/origin/main", pushed)
+        zero = "0" * 40
+
+        clean = self.commit(repo, "b.txt", "nothing to see\n")
+        self.push_check(repo, clean, pushed, True)
+        # A new branch scans only commits that no remote ref has.
+        self.push_check(repo, clean, zero, True)
+        encrypted = self.commit(repo, "c.age", "fakecorp\n")
+        self.push_check(repo, encrypted, pushed, True)
+
+        leaky = self.commit(repo, "d.txt", "host = fakecorp\n")
+        self.push_check(repo, leaky, pushed, False)
+        self.push_check(repo, leaky, zero, False)
+        self.git(repo, "reset", "--quiet", "--hard", encrypted)
+        named = self.commit(repo, "e.txt", "fine\n", message="Move FakeCorp config")
+        self.push_check(repo, named, pushed, False)
+        self.git(repo, "reset", "--quiet", "--hard", encrypted)
+
+        # Deleting a remote branch sends nothing to scan.
+        self.push_check(repo, zero, pushed, True)
+        config.unlink()
+        self.push_check(repo, encrypted, pushed, False)
+
     def test_syntax(self):
-        shell_files = [ROOT / "bootstrap-age-key.sh", ROOT / "run_onchange_before_install-mise.sh", ROOT / "tests/check.sh"]
+        shell_files = [ROOT / "bootstrap-age-key.sh", ROOT / "run_onchange_before_install-mise.sh", ROOT / "tests/check.sh", PRE_PUSH]
         self.run_command(TOOLS["shellcheck"], *shell_files)
         for script in shell_files:
             self.run_command("/bin/sh", "-n", script)

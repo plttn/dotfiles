@@ -1,0 +1,4 @@
+#!/bin/sh
+# Use the tracked hooks in .githooks (the pre-push leak check) for this repo.
+set -eu
+git -C {{ .chezmoi.sourceDir | quote }} config core.hooksPath .githooks

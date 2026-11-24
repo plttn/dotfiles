@@ -1,0 +1,52 @@
+#!/bin/sh
+# Block a push when the commits it sends contain secrets or internal names.
+# The betterleaks config with the internal-name rules is encrypted in this
+# repo and deployed by chezmoi; it never exists here in plain text.
+# Bypass once with `git push --no-verify`.
+set -eu
+
+config="${DOTFILES_LEAKS_CONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/betterleaks/dotfiles.toml}"
+
+fail() {
+    echo "pre-push: $*" >&2
+    exit 1
+}
+
+command -v betterleaks >/dev/null 2>&1 ||
+    fail "betterleaks is not installed (it's in the Brewfile)."
+[ -s "$config" ] || fail "$config is missing; run chezmoi apply."
+
+status=0
+# shellcheck disable=SC2034 # The refs are part of the input format only.
+while read -r local_ref local_sha remote_ref remote_sha; do
+    # A deleted ref sends no commits.
+    case "$local_sha" in *[!0]*) ;; *) continue ;; esac
+    # Scan only what the remote lacks. A remote tip we don't have locally,
+    # or a new branch, falls back to everything not on any remote ref.
+    case "$remote_sha" in
+        *[!0]*) git rev-parse --quiet --verify "$remote_sha^{commit}" >/dev/null ||
+            remote_sha= ;;
+        *) remote_sha= ;;
+    esac
+    if [ -n "$remote_sha" ]; then
+        range="$remote_sha..$local_sha"
+    else
+        range="$local_sha --not --remotes"
+    fi
+    # shellcheck disable=SC2086 # $range holds several rev-list arguments.
+    [ -n "$(git rev-list $range | head -n 1)" ] || continue
+
+    # betterleaks must not read the ref list that git sends on stdin.
+    betterleaks git --config "$config" --log-opts "$range" \
+        --redact --verbose --no-banner --no-color . </dev/null ||
+        status=1
+    # betterleaks scans patches, not commit messages.
+    # shellcheck disable=SC2086
+    git log --format=%B $range |
+        betterleaks stdin --config "$config" \
+            --redact --verbose --no-banner --no-color ||
+        status=1
+done
+
+[ "$status" -eq 0 ] ||
+    fail "found possible secrets or internal names. Fix the commits, or push with --no-verify if they're false positives."

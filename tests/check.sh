@@ -2,7 +2,7 @@
 set -eu
 
 cd "$(dirname "$0")/.."
-for tool in chezmoi python3 fish shellcheck; do
+for tool in chezmoi python3 fish shellcheck betterleaks git; do
     command -v "$tool" >/dev/null 2>&1 || {
         echo "Missing check dependency: $tool" >&2
         exit 1

@@ -1,4 +1,5 @@
 .github/
+.githooks/
 install.sh
 bootstrap-age-key.sh
 tests/
