@@ -1,5 +1,13 @@
 #set -g EZA_CONFIG_DIR "$HOME/.config/eza"
 
+# nano everywhere; VS Code inside its own terminal. git, jj, and chezmoi
+# follow these instead of setting their own editor.
+set -gx EDITOR nano
+set -gx VISUAL nano
+if test "$TERM_PROGRAM" = vscode
+    set -gx VISUAL "code --wait"
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set -gx LS_COLORS (vivid generate molokai)
@@ -43,6 +51,8 @@ test -f ~/.config/op/plugins.sh; and source ~/.config/op/plugins.sh
 direnv hook fish | source
 
 # Commands that currently have registered completions
+# leave until fish 4.10 https://github.com/fish-shell/fish-shell/issues/13049
+
 function __registered_completion_cmds
     complete | string replace -rf -- '^complete(?: -[a-zA-Z]| --[a-z-]+)* (\'[^\']*\'|\S+).*' '$1' | string unescape | sort -u
 end
