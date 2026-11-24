@@ -45,6 +45,15 @@
     "showAdvisor": false,
     "showAuth": false,
     "showAuthUser": false,
-    "authUserLength": 0
+    "authUserLength": 0,
+    "mergeGroups": [
+      [
+        "context",
+        "usage"
+      ]
+    ],
+    "usagePace": true,
+    "showCacheHitRate": false,
+    "showAgentEffort": true
   }
 }
