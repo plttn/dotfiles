@@ -5,10 +5,10 @@ tap "popomore/tap"
 brew "asciinema"
 # Code searching, linting, rewriting
 brew "ast-grep"
-# Improved shell history for zsh, bash, fish and nushell
-brew "atuin", restart_service: :changed
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Secrets scanner built for configurability and speed
+brew "betterleaks"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Diff that understands syntax
